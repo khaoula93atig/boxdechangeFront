@@ -21,7 +21,7 @@ public GetAllByUser(idUser : string){
   return this.http.get( environment.URL+ "/enchere/getUser/"+idUser, { headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem("auth-token")})
 }); }
 
-  public ajouter(enchere:any,channel:string){
+  public ajouter(enchere:any){
     const header = new HttpHeaders({ 
     "Authorization":"Bearer "+sessionStorage.getItem("auth-token") 
     ,"Content-Type": "application/json; charset = utf-8;",'Access-Control-Allow-Origin':'*',
@@ -30,7 +30,7 @@ public GetAllByUser(idUser : string){
   });
     var options = { headers: header };
     console.log(enchere);
-    return this.http.post(environment.URL+"/enchere/" +"save/"+channel,JSON.stringify( enchere),options)
+    return this.http.post(environment.URL+"/enchere/" +"save",JSON.stringify( enchere),options)
   
 
     

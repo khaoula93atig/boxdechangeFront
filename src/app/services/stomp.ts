@@ -4,7 +4,7 @@ import { InjectableRxStompConfig } from "@stomp/ng2-stompjs";
 export const myRxStompConfig: InjectableRxStompConfig = {
     
 
-    brokerURL: ` ws://192.168.1.155:8080/socket`,
+    brokerURL: ` ws://192.168.1.155:8083/socket`,
   
     connectHeaders: {
       login: 'guest',

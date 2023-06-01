@@ -47,7 +47,7 @@ counter = 0;
        e.dateDebut=new Date((form.value.dateDebut).toLocaleString())
        e.heureFin=new Date((form.value.heureFin).toLocaleString())
        console.log(e);
-       this.encherService.ajouter(e,String(user.id)).subscribe(data=>{console.log("ok")
+       this.encherService.ajouter(e).subscribe(data=>{console.log("ok")
         this.toastr.success('avec succès', 'Votre Enchère est Lancée!');
         this.router.navigateByUrl('/dash/propositionList');
       })

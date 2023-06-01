@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         console.log(this.roles)
-        if(this.roles.find(element => element ='ROLE_USER')=='ROLE_USER'){
+        if(this.roles.find(element => element ='ROLE_ENCHERE')=='ROLE_ENCHERE'){
           this.router.navigate(['/dash/dashboard'])
         }
-        if(this.roles.find(element => element ='ROLE_MODERATOR')=='ROLE_MODERATOR'){
+        if (this.roles.find(element => element ='ROLE_BANK')=='ROLE_BANK'){
           this.router.navigate(['/dash/list'])
         }
         

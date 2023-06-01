@@ -24,6 +24,8 @@ import { SortPipe } from './sort.pipe';
 import { WebsocketsService } from './services/websockets.service';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import { myRxStompConfig } from './services/stomp';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import theme from 'highcharts/themes/brand-dark';
 
 
 
@@ -53,6 +55,7 @@ import { myRxStompConfig } from './services/stomp';
     MatSelectModule,
     MatButtonModule,
     MatInputModule,
+    ChartModule
    // AngularFireModule.
     
   ],
@@ -66,7 +69,10 @@ import { myRxStompConfig } from './services/stomp';
       provide: RxStompService,
       useFactory: rxStompServiceFactory,
       deps: [InjectableRxStompConfig],
-    }
+    },{
+      provide: HIGHCHARTS_MODULES,
+      useFactory: () => [ theme ]
+   }
   ],
   bootstrap: [AppComponent]
   

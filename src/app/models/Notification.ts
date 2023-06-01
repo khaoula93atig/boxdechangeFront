@@ -7,4 +7,5 @@ export class notifications{
     timestamp:Date;
     readDate:Date;
     count:number;
+    type:string;
 }

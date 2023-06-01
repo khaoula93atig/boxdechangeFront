@@ -29,8 +29,9 @@ export class NotificationService {
       });
   }
 
-  sendReadReceipt(channelId: string, username: string) {
-    this.http.post(environment.URL + '/messages/', {
+  sendReadReceipt(channelId: string, username: string):Observable<any> {
+   
+    return this.http.post<any>(environment.URL + '/messages/', {
       channel: channelId,
       username: username
     });
@@ -40,5 +41,8 @@ export class NotificationService {
     return this.msgs.asObservable();
   }
   
+   getNotificationByuserAndDate(userId : string): Observable<notifications[]>{
+    return this.http.get<notifications[]>(environment.URL+"/messages/getNotification/"+userId)
+   }
 
 }

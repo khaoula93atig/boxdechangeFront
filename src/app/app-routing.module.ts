@@ -14,11 +14,11 @@ import { PropositionListComponent } from './proposition-list/proposition-list.co
 const routes: Routes = [
   {path:'', component:LoginComponent, canActivate:[AfterAuthGuard]},
   {path:'dash', component:MenuComponent,canActivate:[AuthGuard],children:[
-    {path:'list', component:ListEnchereComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_MODERATOR'}},
-    {path:'dashboard', component:DashboardComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
-    {path:'ajoutEnchere', component:FormEnchereComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
-    {path:'convertisseur', component:ConvertisseurComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}},
-    {path:'propositionList', component:PropositionListComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_USER'}}
+    {path:'list', component:ListEnchereComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_BANK'}},
+    {path:'dashboard', component:DashboardComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}},
+    {path:'ajoutEnchere', component:FormEnchereComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}},
+    {path:'convertisseur', component:ConvertisseurComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}},
+    {path:'propositionList', component:PropositionListComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}}
 
   ]},
   

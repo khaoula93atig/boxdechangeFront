@@ -9,9 +9,10 @@ import { environment } from 'src/environments/environment';
 })
 export class VenteService {
 
+  //api de vente 
+  private apiVente = environment.URL+'/vente'
   private apiUrl = environment.URL+ '/getALLVente';
-  private apiUrlMAX =  environment.URL+  '/getVenteMAX';
-  private apiUrlMIN =  environment.URL+ '/getVenteMIN';
+  private apiAverage = environment.URL+'/avg'
 
   constructor(private http: HttpClient) { }
 
@@ -19,20 +20,55 @@ export class VenteService {
     return this.http.get<Vente[]>(this.apiUrl);
   }
 
-
-  getMAX(currency: string): Observable<Vente> {
-    return this.http.get<Vente>(this.apiUrlMAX + "/" + currency);
+  // get Last vente de jour 
+  getLastVentes():Observable<Vente[]>{
+    return this.http.get<Vente[]>(this.apiVente+'/LastVentes')
   }
 
-  getMIN(currency: string): Observable<Vente> {
-    return this.http.get<Vente>(this.apiUrlMIN + "/" + currency);
+  //get max valeur de vente par devise de ce jour
+  getVenteMaxJour(devise : string):Observable<number>{
+    return this.http.get<number>(this.apiVente+'/maxVenteJour/'+devise)
   }
 
-  getMAXDATE(currency: string, date: string): Observable<Vente> {
-    return this.http.get<Vente>(this.apiUrlMAX + "/" + currency + "/" + date);
+  //get min valeur de vente par devise de ce jour
+  getVenteMinJour(devise : string):Observable<number>{
+    return this.http.get<number>(this.apiVente+'/minVenteJour/'+devise)
   }
 
-  getMINDATE(currency: string, date: string): Observable<Vente> {
-    return this.http.get<Vente>(this.apiUrlMIN + "/" + currency + "/" + date);
+  //get max valeur de vente par devise de cette semaine
+  getVenteMaxSemaine(devise : string):Observable<number>{
+    return this.http.get<number>(this.apiVente+'/maxVenteSemaine/'+devise)
   }
+
+  //get min valeur de vente par devise de cette semaine
+  getVenteMinSemaine(devise : string):Observable<number>{
+    return this.http.get<number>(this.apiVente+'/minVenteSemaine/'+devise)
+  }
+
+  //get max valeur de vente par devise de ce Mois
+  getVenteMaxMois(devise : string):Observable<number>{
+    return this.http.get<number>(this.apiVente+'/maxVenteMois/'+devise)
+  }
+
+  //get min valeur de vente par devise de ce Mois
+  getVenteMinMois(devise : string):Observable<number>{
+    return this.http.get<number>(this.apiVente+'/minVenteMois/'+devise)
+  }
+  
+  //get max valeur de vente par devise de cet année
+  getVenteMaxAns(devise : string):Observable<number>{
+    return this.http.get<number>(this.apiVente+'/maxVenteAns/'+devise)
+  }
+
+  //get min valeur de vente par devise de cet année
+  getVenteMinAns(devise : string):Observable<number>{
+    return this.http.get<number>(this.apiVente+'/minVenteAns/'+devise)
+  }
+
+  getAverageByDevise(devise:string):Observable<any[]>{
+  return this.http.get<any[]>(this.apiAverage+"/getByDevise/"+devise)
+  }
+
+
+  
 }

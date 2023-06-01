@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  URL:'http://192.168.1.155:8080',
+  URL:'http://192.168.1.155:8083',
+  urlTest:'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/range.json',
    firebaseConfig : {
     apiKey: "AIzaSyCzGpqL900sec13CXbdGU_ODEFOgG7W0R0",
     authDomain: "boxdechange.firebaseapp.com",
