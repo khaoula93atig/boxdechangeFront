@@ -1,4 +1,5 @@
 //import { Component, OnInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { Enchere } from '../models/Enchere';
 import { AuthService } from '../services/auth.service';
 import { EnchereService } from '../services/enchere.service';
@@ -7,23 +8,32 @@ import { PropositionService } from '../services/proposition.service';
 //import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
+import { TokenStorageService } from '../services/token-storage.service';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-proposition-list',
   templateUrl: './proposition-list.component.html',
   styleUrls: ['./proposition-list.component.css']
 })
 export class PropositionListComponent implements OnInit {
+  dataSource: MatTableDataSource<Enchere>
+  displayedColumns = ["Reference", "Devise","Montant","Date","action"]
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   listenchere:any[]=[]
   displayStyle = "none";
   enchere=new Enchere();
+  userId:number;
   propositionsForSelectedEnchere : any[]=[];
-  constructor(private enchereService:EnchereService,private propositionService:PropositionService
-    ,private authService:AuthService) { }
+
+  constructor(private enchereService:EnchereService,
+    private propositionService:PropositionService,
+    private authService:AuthService,
+    private tokenStorage: TokenStorageService,
+    ) {this.dataSource = new MatTableDataSource(this.listenchere) }
 
   ngOnInit(): void {
-    console.log(sessionStorage.getItem("auth-token"));
-    console.log("tet aaa");
+    this.userId=this.tokenStorage.getUser().id
     this.GetAllEnchere()
     this.sort = new MatSort();
     this.propositionService.GetAll().subscribe(res=>{
@@ -34,27 +44,14 @@ export class PropositionListComponent implements OnInit {
     })
   }
   GetAllEnchere(){
-
-    this.authService.decodeToken().subscribe(res=>{
-      this.authService.getUserDataByUserName(res["sub"]).subscribe(res=>{
-        this.enchereService.GetAllByUser(res["id"]).subscribe((data:any[])=>{
-          this.listenchere=data
-          console.log(this.listenchere)
-        })
-      })
+    this.enchereService.GetEncherByUser(this.userId).subscribe(res=>{
+      console.log("mes encheres",res)
+      this.dataSource.data = res
+      this.dataSource.paginator=this.paginator
+      this.dataSource.paginator._intl.itemsPerPageLabel='Eléments par page'
+      this.dataSource.paginator._intl.getRangeLabel=this.francaisRangeLabel
+      //this.listenchere=res
     })
-
-   /* this.authService.decodeToken().subscribe(res=>{
-      this.authService.getUserDataByUserName(res["sub"]).subscribe(res=>{
-        this.enchereService.GetAllByUser(res["id"]).subscribe((data:any[])=>{this.listenchere=data
-          console.log(this.listenchere)
-        })
-       
-      
-    })
-
-
-  }*/
 
   }
   sortByKey(array: any[], key: string, ascending: boolean = true) {
@@ -71,78 +68,36 @@ export class PropositionListComponent implements OnInit {
   sortPropositions(key: string, ascending: boolean = true) {
     this.propositionsForSelectedEnchere = this.sortByKey(this.propositionsForSelectedEnchere, key, ascending);
   }
-  
-  saveEnchere(form){
-    console.log(form.value);
-   /* let prop = 
-    {
-      "idProposition":0,
-      "enchere":{ "idEnchere" :form.controls['idEnchere'].value},
-      "user":{"id" :0},
-      "taux_soumission" : form.controls['tauxSoumission'].value
-    }*/
-    //console.log(prop)
-    this.authService.decodeToken().subscribe(res=>{
-     // console.log(res)
-    //  console.log(res["sub"])
-    this.authService.getUserDataByUserName(res["sub"]).subscribe(res=>{
-        console.log( res);
-    let prop = 
-    {
-      "idProposition":0,
-      "enchere":{ "idEnchere" :form.controls['idEnchere'].value},
-      "user":{"id" :res["id"]},
-      "taux_soumission" : form.controls['tauxSoumission'].value
-    }
-    console.log(prop); 
-    this.propositionService.Add(prop).subscribe(res=>{console.log(res)},(err)=>{
-      console.log(err)
-    })
-        //prop.user.id=res["id"]
-      })
-    })
-    //console.log(prop)
-    
-
-  }
+ 
   openPopup() {
     this.displayStyle = "block";
   }
   closePopup() {
     this.displayStyle = "none";
   }
- getbyindex(index:number){
-  this.propositionsForSelectedEnchere=[];
-    for(let i=0; i<this.listenchere.length;i++){
-      if(i==index){
-        this.enchere=this.listenchere[i]
-        this.getPropositionsByEnchere(this.enchere)
-      }
-    }
-    console.log(this.enchere)
+
+  getPropositionsByEnchere(enchere) {
+    let latestPropositions = [];
+    this.propositionService.getByEnchereId(enchere).subscribe((res: any[]) => {
+      console.log("prop",res)
+      this.propositionsForSelectedEnchere = res
+    });
   }
 
-  getPropositionsByEnchere(enchere: Enchere) {
-    let latestPropositions = [];
-    this.propositionService.getByEnchereId(enchere.idEnchere).subscribe((res: any[]) => {
-      for(let i=0; i<res.length; i++){
-        let existingProposition = latestPropositions.find(p => p.userId === res[i].userId);
-        if(existingProposition === undefined){
-          latestPropositions.push({userId: res[i].userId, propositions: [res[i]]});
-        }else{
-          if(res[i].idProposition > existingProposition.propositions[0].idProposition){
-            existingProposition.propositions[1] = existingProposition.propositions[0];
-            existingProposition.propositions[0] = res[i];
-          }else if(res[i].idProposition > existingProposition.propositions[1]?.idProposition){
-            existingProposition.propositions[1] = res[i];
-          }
-        }
-      }
-      this.propositionsForSelectedEnchere = latestPropositions
-      .reduce((acc, val) => acc.concat(val.propositions), [])
-      .sort((a, b) => b.TauxSoumission - a.TauxSoumission);
+  //traduction de pagination 
+  francaisRangeLabel = (page: number, pageSize: number, length: number) => {
+    if (length == 0 || pageSize == 0) { return `0 de ${length}`; }
     
-    });
+    length = Math.max(length, 0);
+  
+    const startIndex = page * pageSize;
+  
+    // If the start index exceeds the list length, do not try and fix the end index to the end.
+    const endIndex = startIndex < length ?
+        Math.min(startIndex + pageSize, length) :
+        startIndex + pageSize;
+  
+    return `${startIndex + 1} - ${endIndex} de ${length}`;
   }
   
 

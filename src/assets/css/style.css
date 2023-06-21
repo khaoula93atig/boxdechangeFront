@@ -8600,8 +8600,6 @@ pre {
 .table-borderless tbody + tbody {
   border: 0; }
 
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #000000; }
 
 .table-hover tbody tr:hover {
   color: #212529;

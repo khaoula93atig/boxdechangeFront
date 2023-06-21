@@ -26,6 +26,16 @@ import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@s
 import { myRxStompConfig } from './services/stomp';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import theme from 'highcharts/themes/brand-dark';
+import { CurrencyPipe } from '@angular/common';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PositionChangeComponent } from './position-change/position-change.component';
 
 
 
@@ -40,7 +50,8 @@ import theme from 'highcharts/themes/brand-dark';
     PropositionListComponent,
     ConvertisseurComponent,
     DashboardComponent,
-    SortPipe
+    SortPipe,
+    PositionChangeComponent
     
   ],
   imports: [
@@ -55,7 +66,15 @@ import theme from 'highcharts/themes/brand-dark';
     MatSelectModule,
     MatButtonModule,
     MatInputModule,
-    ChartModule
+    ChartModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    MatPaginatorModule
    // AngularFireModule.
     
   ],
@@ -72,7 +91,7 @@ import theme from 'highcharts/themes/brand-dark';
     },{
       provide: HIGHCHARTS_MODULES,
       useFactory: () => [ theme ]
-   }
+   },CurrencyPipe
   ],
   bootstrap: [AppComponent]
   

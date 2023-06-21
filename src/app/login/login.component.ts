@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { TokenStorageService } from '../services/token-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,24 +18,25 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   constructor(private authService: AuthService,
      private tokenStorage: TokenStorageService, 
+     private toastr: ToastrService,
      private router: Router) { }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
+   /* if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
-    }
+    }*/
   }
   onSubmit(): void {
     this.authService.login(this.form).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
+        console.log(data.accessToken)
         this.tokenStorage.saveUser(data);
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         console.log(this.roles)
+        this.toastr.success('Connection approuvée','Bienvennue!!' );
         if(this.roles.find(element => element ='ROLE_ENCHERE')=='ROLE_ENCHERE'){
           this.router.navigate(['/dash/dashboard'])
         }
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
         
       },
       err => {
+        this.toastr.error('Vérifier vos informations','Erreur' );
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }

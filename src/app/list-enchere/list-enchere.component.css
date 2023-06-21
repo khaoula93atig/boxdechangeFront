@@ -446,4 +446,7 @@ table {
           select.tt-query[multiple],
           select.tt-hint[multiple] {
             height: auto; }
+          .table-enchere  thead th {
+              border-bottom: 1px solid #333747 !important;
+          }
           

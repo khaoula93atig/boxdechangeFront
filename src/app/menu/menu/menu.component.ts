@@ -6,6 +6,7 @@ import { notifications } from 'src/app/models/Notification';
 import { WebsocketsService } from 'src/app/services/websockets.service';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import { NotificationService } from 'src/app/services/notification.service';
+import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -36,6 +37,22 @@ export class MenuComponent implements OnInit {
   userName:string
   messages: string[] = [];
   userId:number
+  isExpanded = true;
+  showSubmenu: boolean = false;
+  isShowing = false;
+  showSubSubMenu: boolean = false;
+
+  mouseenter() {
+    if (!this.isExpanded) {
+      this.isShowing = true;
+    }
+  }
+
+  mouseleave() {
+    if (!this.isExpanded) {
+      this.isShowing = false;
+    }
+  }
   ngOnInit(): void {
    const userId = this.tokenStorage.getUser().id;
       const url = `/socket/notif/`+userId

@@ -7,6 +7,7 @@ import { chartService } from '../chart.service';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import {StockChart} from 'angular-highcharts';
+import { CurrencyPipe } from '@angular/common';
 
 /*declare var require: any;
 const More = require('highcharts/highcharts-more');
@@ -66,7 +67,9 @@ export class DashboardComponent implements OnInit {
   public chartOptions: any;
   stock: StockChart;
   data: any;
+  symbol:any
   constructor(private excelService: ExcelService,
+    private currencyPipe: CurrencyPipe,
     private authService: AuthService,
     private VenteService: VenteService,
     private chartService: chartService,) {
@@ -76,17 +79,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     this.GetAllVente();
-    this.getMaxValeurJour(this.headerValue)
-    this.getMinValeurJour(this.headerValue)
-    this.getMaxValeurSemaine(this.headerValue)
-    this.getMinValeurSemaine(this.headerValue)
-    this.getMaxValeurMois(this.headerValue)
-    this.getMinValeurMois(this.headerValue)
-    this.getMaxValeurAns(this.headerValue)
-    this.getMinValeurAns(this.headerValue)
-    this.getAverge(this.headerValue)
-    
-    
+    this.ReaptedInstruction(this.headerValue)
 
   }
 
@@ -100,6 +93,18 @@ export class DashboardComponent implements OnInit {
       this.ventes = data
       console.log(this.dataSource)
     })
+  }
+
+  ReaptedInstruction(event){
+    this.getMaxValeurJour(event)
+    this.getMinValeurJour(event)
+    this.getMaxValeurSemaine(event)
+    this.getMinValeurSemaine(event)
+    this.getMaxValeurMois(event)
+    this.getMinValeurMois(event)
+    this.getMaxValeurAns(event)
+    this.getMinValeurAns(event)
+    this.getAverge(event)
   }
 
   sortData(sort: Sort) {
@@ -141,7 +146,8 @@ export class DashboardComponent implements OnInit {
   //getmax valeur de vente de ce jour
   getMaxValeurJour(devise){
     this.VenteService.getVenteMaxJour(devise).subscribe(data=>{
-  this.maxValeurVenteJour=data})
+  this.maxValeurVenteJour=data
+  this.getFormattedValueLength(this.devise)})
   }
 
   //get min valeur de vente de ce jour
@@ -191,22 +197,22 @@ export class DashboardComponent implements OnInit {
     this.headerValue = headerElement.textContent.trim();
     this.devise = this.headerValue
     console.log(this.headerValue)
-    this.getMaxValeurJour(this.devise)
-    this.getMinValeurJour(this.devise)
-    this.getMaxValeurSemaine(this.devise)
-    this.getMinValeurSemaine(this.devise)
-    this.getMaxValeurMois(this.devise)
-    this.getMinValeurMois(this.devise)
-    this.getMaxValeurAns(this.devise)
-    this.getMinValeurAns(this.devise)
-    this.getAverge(this.headerValue)
+    this.ReaptedInstruction(this.devise)
+  }
+
+  onChange(event){
+    console.log(event)
+    this.headerValue=event
+    this.devise=event
+    this.ReaptedInstruction(this.headerValue)
   }
 
 
 getAverge(event){
+  let tab:any=[]
   this.VenteService.getAverageByDevise(event).subscribe(res=>{
     console.log(res)
-    let tab:any=[]
+    
     for(let r of res){
       let date = new Date(r.datedevise).getTime()
       tab.push([date,r.devise])
@@ -217,7 +223,7 @@ getAverge(event){
       selected: 1
     },
     title: {
-      text: 'AAPL Stock Price'
+      text: 'historique de '+this.headerValue
     },
     chart:{
       backgroundColor:"none"
@@ -226,18 +232,33 @@ getAverge(event){
       tooltip: {
         valueDecimals: 2
       },
-      name: 'AAPL',
+      name: this.headerValue,
       type: 'areaspline',
       data: tab,
+      dataGrouping: {
+        units: [[
+        'week', // unit name
+        [1] // allowed multiples
+        ], [
+        'month',
+        [1, 2, 3, 4, 6]
+        ]]
+        },
       fillColor: {
         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
         stops: [
-            [0, '#262935'],
-            [1, '#0d0e12']
+            [0, 'rgba(127, 135, 231,1)'],
+            [1, 'rgba(38, 41, 53, .5)']
         ]
     },
     }]
   });
 })
+}
+getFormattedValueLength(devise) {
+  const formattedValue = this.currencyPipe.transform(this.maxValeurVenteJour, devise, 'symbol', '1.3');
+  this.symbol = formattedValue.replace(this.maxValeurVenteJour.toString(), '').trim();
+  console.log(this.symbol)
+  return this.symbol.length;
 }
 }

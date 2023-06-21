@@ -46,7 +46,7 @@ exchangeIcon.addEventListener("click", ()=>{
     getExchangeRate(); // calling getExchangeRate
 })
 
-function getExchangeRate(){
+/*function getExchangeRate(){
     const amount = document.querySelector("form input");
     const exchangeRateTxt = document.querySelector("form .exchange-rate");
     let amountVal = amount.value;
@@ -65,4 +65,4 @@ function getExchangeRate(){
     }).catch(() =>{ // if user is offline or any other error occured while fetching data then catch function will run
         exchangeRateTxt.innerText = "Something went wrong";
     });
-}
+}*/

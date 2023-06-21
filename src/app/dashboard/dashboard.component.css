@@ -3,27 +3,6 @@
   padding-right: 0px;
 
 }
-.price {
-  display: inline-block;
-}
-
-.price::first-letter {
-  padding-right: 0.3em;
-}
-
-.highcharts-figure {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-#container {
-  margin: 0 auto;
-}
-
-button .dim {
-  opacity: 50%;
-  pointer-events: none;
-}
 body {
   margin: 0;
   overflow: hidden;

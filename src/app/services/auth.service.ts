@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Token } from '../models/Token';
+import {map} from 'rxjs/operators';
 
 const AUTH_API =  environment.URL+ '/api/auth/';
 
@@ -14,15 +16,17 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  private currentUserSubject: BehaviorSubject<Token>;
+  public currentUser: Observable<Token>;
 
-  login(credentials): Observable<any> {
-    console.log(
-      'environment.url_house farmID' +
-        AUTH_API +
-        '/farm/' +
-        'signin' ,
-    )
+  constructor(private http: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<Token>(
+      JSON.parse(localStorage.getItem('auth-user'))
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
+   }
+
+  login(credentials): Observable<any>{
     return this.http.post(AUTH_API + 'signin', {
       username: credentials.username,
       password: credentials.password
@@ -43,5 +47,8 @@ export class AuthService {
   getUserDataByUserName(username:string){
     return this.http.get(AUTH_API+"findByUserName/"+username)
 
+  }
+  public get currentUserValue(): Token {
+    return this.currentUserSubject.value;
   }
 }

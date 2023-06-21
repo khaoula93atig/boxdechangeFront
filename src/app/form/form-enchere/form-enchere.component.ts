@@ -6,6 +6,7 @@ import { EnchereService } from 'src/app/services/enchere.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DatePipe, formatDate } from '@angular/common';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-form-enchere',
@@ -15,7 +16,8 @@ import { DatePipe, formatDate } from '@angular/common';
 export class FormEnchereComponent implements OnInit {
 
   constructor(private encherService: EnchereService,private authService:AuthService,
-    private toastr: ToastrService,private router:Router
+    private toastr: ToastrService,private router:Router,
+    private tokenStorage:TokenStorageService
     ) { }
     staticValue = '';
 counter = 0;
@@ -33,27 +35,28 @@ counter = 0;
     
     form.value.dateDebut =datePipe.transform(form.value.dateDebut , "yyyy-MM-dd HH:mm:ss");*/
     //const datePipe = new DatePipe('en-US');
-    this.authService.decodeToken().subscribe(res=>{
+    //this.authService.decodeToken().subscribe(res=>{
       //console.log(res)
-      this.authService.getUserDataByUserName(res["sub"]).subscribe(res=>{
+      //this.authService.getUserDataByUserName(res["sub"]).subscribe(res=>{
       //  console.log(res)
        // form.value.user.id=res["id"]
        //form["user"]=1
        let e:Enchere = form.value
       // e.idEnchere="gijgjiz"
        let user = new User()
-        user.id= Number(res["id"])
+    user.id= this.tokenStorage.getUser().id
        e.user=user
        e.dateDebut=new Date((form.value.dateDebut).toLocaleString())
        e.heureFin=new Date((form.value.heureFin).toLocaleString())
        console.log(e);
-       this.encherService.ajouter(e).subscribe(data=>{console.log("ok")
+       this.encherService.ajouter(e).subscribe(data=>{console.log(data)
+       if(data!=null){
         this.toastr.success('avec succès', 'Votre Enchère est Lancée!');
         this.router.navigateByUrl('/dash/propositionList');
+       }else{
+        this.toastr.error('error','echéc d`operation')
+       }
       })
-       
-      })
-    })
     
     //console.log(form.value)
     //this.encherService.ajouter(form.value).subscribe(data=>console.log("ok"))

@@ -33,5 +33,20 @@ export class PropositionService {
     
   }
 
+  //get proposition by user and enchere
+  public getPropostionByUserAndEnchere(user:number, enchere:string):Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+ "/proposition/getByUserAndEnchere/"+user+'/'+enchere)
+  }
+  
+  //get proposition of bank
+  public getPropostionofBank(user:number, enchere:string):Observable<any[]>{
+    return this.http.get<any[]>(environment.URL+ "/proposition/getOfBank/"+user+'/'+enchere)
+  }
+
+  //modifier proposition
+  public modifierProposition(proposition:any){
+    return this.http.put(environment.URL+ "/proposition/update",proposition)
+  }
+
  
 }

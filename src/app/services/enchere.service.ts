@@ -9,28 +9,25 @@ import { environment } from '../../environments/environment';
 export class EnchereService {
 
   constructor(private http:HttpClient) { }
-  /*public ajouter(enchere:any):Observable<any>{
-    const header = new HttpHeaders({ 
-    "Authorization":"Bearer "+sessionStorage.getItem("auth-token"),"Content-Type": "application/json; charset = utf-8;" });
-    var options = { headers: header };
-    return this.http.post<any>(environment.URL +"save",JSON.stringify( enchere),options)
-  }
-*/
+ 
 public GetAllByUser(idUser : string){
   
-  return this.http.get( environment.URL+ "/enchere/getUser/"+idUser, { headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem("auth-token")})
-}); }
+  return this.http.get( environment.URL+ "/enchere/getUser/"+idUser)}
 
-  public ajouter(enchere:any){
-    const header = new HttpHeaders({ 
+public GetEncherByUser(idUser : number):Observable<any[]>{
+  return this.http.get<any[]>(environment.URL+"/enchere/getbyUser/"+idUser)
+}
+
+  public ajouter(enchere:any):Observable<any>{
+    /*const header = new HttpHeaders({ 
     "Authorization":"Bearer "+sessionStorage.getItem("auth-token") 
     ,"Content-Type": "application/json; charset = utf-8;",'Access-Control-Allow-Origin':'*',
     'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept, Authorization',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'  ,"Accept": "application/json"  
   });
     var options = { headers: header };
-    console.log(enchere);
-    return this.http.post(environment.URL+"/enchere/" +"save",JSON.stringify( enchere),options)
+    console.log(enchere);*/
+    return this.http.post(environment.URL+"/enchere/" +"save", enchere)
   
 
     
@@ -40,7 +37,7 @@ public GetAllByUser(idUser : string){
 
 
   public GetEnchere():Observable<any[]>{
-    return this.http.get<any[]>(environment.URL)
+    return this.http.get<any[]>(environment.URL+"/enchere")
   }
   public GetEnchereNull():Observable<any[]>{
     const header = new HttpHeaders({ 

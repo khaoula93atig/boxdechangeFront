@@ -1,415 +1,174 @@
 
-<div class="container-scroller">
-  <!-- partial:partials/_sidebar.html -->
-  <nav class="sidebar sidebar-offcanvas" id="sidebar">
-    <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-      <a class="sidebar-brand brand-logo" href="index.html"><h4>Box de Change</h4></a>
-      <a class="sidebar-brand brand-logo-mini" href="index.html"><h4>Box de Change</h4></a>
-    </div>
-    <ul class="nav">
-      <!--<li class="nav-item profile">
-        <div class="profile-desc">
-          <div class="profile-pic">
-            <div class="count-indicator">
-              <img class="img-xs rounded-circle " src="../../../assets/images/faces/face15.jpg" alt="">
-              <span class="count bg-success"></span>
+  <mat-toolbar class="example-toolbar">
+    <h1 class="example-app-name text-white">Box Change</h1>
+	<button class="btn btn-dark" mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+  <span class="example-spacer"></span>
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="dropdown nav-link">
+        <a (click)="readNotification()" class="text-white count-indicator" id="notificationDropdown"  data-toggle="dropdown">
+                    
+          <mat-icon>notifications</mat-icon>
+          <span *ngIf="nbr!=0" class="badge badge-danger badge-counter count bg-danger">{{nbr}}</span>
+        </a>
+        <div *ngFor="let notif of notifications" class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+          <h6 class="p-3 mb-0"> Notifications</h6>
+          <div class="dropdown-divider"></div>
+          <!-- new notification des encheres -->
+          <a *ngIf="notification.type == 'enchere' && notification!= null" class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-gavel text-success"></i>
+              </div>
             </div>
-            <div class="profile-name">
-              <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-              <span>Gold Member</span>
+            <div class="preview-item-content">
+              <p class="preview-subject text-muted ellipsis mb-1">Nouveau enchère</p>
+              <p class="preview-subject mb-1">{{notification.sender}} || {{notification.content}}</p>
+              <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notification.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
             </div>
-          </div>
-          <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
-          <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-            <a href="#" class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-settings text-primary"></i>
-                </div>
+          </a>
+          <!--new proposition -->
+          
+          <a *ngIf="notification.type == 'proposition' && notification!= null " class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-gavel text-success"></i>
               </div>
-              <div class="preview-item-content">
-                <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
-              </div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-onepassword  text-info"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
-              </div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-calendar-today text-success"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </li>-->
-      <li class="nav-item nav-category">
-        <span class="nav-link">Navigation</span>
-      </li>
-      <li class="nav-item menu-items" *ngIf="role!='ROLE_BANK'">
-        <a class="nav-link" [routerLink]="['/dash/dashboard']">
-          <span class="menu-icon">
-            <i class="mdi mdi-speedometer"></i>
-          </span>
-          <span class="menu-title">Dashboard </span>
-        </a>
-      </li>
-      <li class="nav-item menu-items" *ngIf="role!='ROLE_ENCHERE'">
-        <a class="nav-link" data-toggle="collapse" [routerLink]="['/dash/list']" aria-expanded="false" aria-controls="ui-basic">
-          <span class="menu-icon">
-            <i class="mdi mdi-laptop"></i>
-          </span>
-          <span class="menu-title">Les enchères</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <!--<div class="collapse" id="ui-basic">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-          </ul>
-        </div>-->
-      </li>
-      <li class="nav-item menu-items" *ngIf="role!='ROLE_BANK'">
-        <a class="nav-link" data-toggle="collapse" [routerLink]="['/dash/propositionList']" aria-expanded="false" aria-controls="ui-basic">
-          <span class="menu-icon">
-            <i class="mdi mdi-laptop"></i>
-          </span>
-          <span class="menu-title">Mes enchères</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <!--<div class="collapse" id="ui-basic">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-          </ul>
-        </div>-->
-      </li>
-      <li class="nav-item menu-items" *ngIf="role!='ROLE_BANK'">
-        <a class="nav-link" [routerLink]="['/dash/ajoutEnchere']">
-          <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
-          </span>
-          <span class="menu-title">Lancer une enchère</span>
-        </a>
-      </li>
-     <!-- <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/tables/basic-table.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-table-large"></i>
-          </span>
-          <span class="menu-title">Tables</span>
-        </a>
-      </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/charts/chartjs.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-chart-bar"></i>
-          </span>
-          <span class="menu-title">Charts</span>
-        </a>
-      </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/icons/mdi.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-contacts"></i>
-          </span>
-          <span class="menu-title">Icons</span>
-        </a>
-      </li>-->
-    <!--  <li class="nav-item menu-items" *ngIf="role!='ROLE_ADMIN'">
-        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-          <span class="menu-icon">
-            <i class="mdi mdi-security"></i>
-          </span>
-          <span class="menu-title">User Pages</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="auth">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-          </ul>
-        </div>
-      </li> -->
-
+            </div>
+            <div class="preview-item-content">
+              <p class="preview-subject text-muted ellipsis mb-1">Proposition de la Bank </p>
+              <p class="preview-subject mb-1">{{notification.sender}} || {{notification.content}}</p>
+              <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notification.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item preview-item" >
       
-      <li class="nav-item menu-items" *ngIf="role!='ROLE_BANK'">
-        <a class="nav-link" [routerLink]="['/dash/convertisseur']">
-          <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
-          </span>
-          <span class="menu-title">Convertisseur</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!-- partial -->
-  <div class="container-fluid page-body-wrapper">
-    <!-- partial:partials/_navbar.html -->
-    <nav class="navbar p-0 fixed-top d-flex flex-row">
-      <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo-mini" href="index.html"><h4>Box de Change</h4></a>
-      </div>
-      <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-          <span class="mdi mdi-menu"></span>
-        </button>
-       <!-- <ul class="navbar-nav w-100">
-          <li class="nav-item w-100">
-            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-              <input type="text" class="form-control" placeholder="Search products">
-            </form>
-          </li>
-        </ul>-->
-        <!---->
-        <ul class="navbar-nav navbar-nav-right">
-          <!--
-          <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#">+ Create New Project</a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
-              <h6 class="p-3 mb-0">Projects</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-file-outline text-primary"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1">Software Development</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-web text-info"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1">UI Development</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-layers text-danger"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1">Software Testing</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <p class="p-3 mb-0 text-center">See all projects</p>
-            </div>
-          </li> 
-          <li class="nav-item nav-settings d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-view-grid"></i>
-            </a>
-          </li>
-          <li class="nav-item dropdown border-left">
-            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <i class="mdi mdi-email"></i>
-              <span class="count bg-success"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-              <h6 class="p-3 mb-0">Messages</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <img src="../../../assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
-                  <p class="text-muted mb-0"> 1 Minutes ago </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <img src="../../../assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
-                  <p class="text-muted mb-0"> 15 Minutes ago </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <img src="../../../assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
-                  <p class="text-muted mb-0"> 18 Minutes ago </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <p class="p-3 mb-0 text-center">4 new messages</p>
-            </div>
-          </li>-->
-          <li class="nav-item dropdown ">
-            <a (click)="readNotification()" class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-              
-              <i class="mdi mdi-bell"></i>
-              <span *ngIf="nbr!=0" class="badge badge-danger badge-counter count bg-danger">{{nbr}}</span>
-              <!--<span class="badge badge-danger badge-counter count bg-danger">{{nbr}}</span><i class="fas fa-bell fa-fw"></i>
-              <span class="count bg-danger"></span>-->
-            </a>
-            <div *ngFor="let notif of notifications" class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-              <h6 class="p-3 mb-0"> Notifications</h6>
-              <div class="dropdown-divider"></div>
-              <!-- new notification des encheres 
-              <a *ngIf="notification.type == 'enchere' && notification!= null" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-gavel text-success"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject text-muted ellipsis mb-1">Nouveau enchère</p>
-                  <p class="preview-subject mb-1">{{notification.sender}} || {{notification.content}}</p>
-                  <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notification.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
-                </div>
-              </a>-->
-              <!--new proposition -->
-              
-              <a *ngIf="notification.type == 'proposition' && notification!= null " class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-gavel text-success"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject text-muted ellipsis mb-1">Proposition de la Bank </p>
-                  <p class="preview-subject mb-1">{{notification.sender}} || {{notification.content}}</p>
-                  <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notification.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item" >
-
-                <!-- notification des encheres -->
-                
-                <div class="preview-thumbnail" *ngIf="notif.type == 'enchere'">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-gavel text-success"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content" *ngIf="notif.type == 'enchere'">
-                  <p class="preview-subject text-muted ellipsis mb-1">Nouveau enchère</p>
-                  <p class="preview-subject mb-1">{{notif.sender}} || {{notif.content}}</p>
-                  <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notif.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
-                  <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" *ngIf="notif.timestamp == now"> aujourd'huit{{notif.timestamp| date:'HH:mm'}}</small>
-                </div>
-                
-
-                  <!--notification des propositions -->
-                
-                  <div class="preview-thumbnail" *ngIf="notif.type == 'proposition' ">
-                    <div class="preview-icon bg-dark rounded-circle">
-                      <i class="mdi mdi-reply text-success"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content" *ngIf="notif.type == 'proposition' ">
-                    <p class="preview-subject text-muted ellipsis mb-1">Proposition de la Bank </p>
-                    <p class="preview-subject mb-1">{{notif.sender}} || {{notif.content}}</p>
-                    <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notif.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
-                    <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" *ngIf="notif.timestamp == now"> aujourd'huit{{notif.timestamp| date:'HH:mm'}}</small>
-                  </div>
-                  
-              </a>
-              <div class="dropdown-divider"></div>
-              <!--<a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-link-variant text-warning"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject mb-1">Launch Admin</p>
-                  <p class="text-muted ellipsis mb-0"> New admin wow! </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <p class="p-3 mb-0 text-center">See all notifications</p>
-              -->
-            </div>
-          </li>
-          <!---->
-          <li class="nav-item dropdown">
-            <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
-              <div class="navbar-profile">
-                <img class="img-xs rounded-circle" src="../../../assets/images/faces/face15.jpg" alt="">
-                <p class="mb-0 d-none d-sm-block navbar-profile-name">{{userName}}</p>
-                <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+            <!-- notification des encheres -->
+            
+            <div class="preview-thumbnail" *ngIf="notif.type == 'enchere'">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-gavel text-success"></i>
               </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-              <h6 class="p-3 mb-0">Profile</h6>
-              <div class="dropdown-divider"></div>
-              <!--<a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-settings text-success"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <p class="preview-subject mb-1">Settings</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>-->
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-dark rounded-circle">
-                    <i class="mdi mdi-logout text-danger"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content" (click)="logoutAndQuit()">
-                  <p class="preview-subject mb-1">Log out</p>
-                </div>
-                
-              </a>
-              <!--<div class="dropdown-divider"></div>
-              <p class="p-3 mb-0 text-center">Advanced settings</p>-->
             </div>
-          </li>
-        </ul>
-
-
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-          <span class="mdi mdi-format-line-spacing"></span>
-        </button>
+            <div class="preview-item-content" *ngIf="notif.type == 'enchere'">
+              <p class="preview-subject text-muted ellipsis mb-1">Nouveau enchère</p>
+              <p class="preview-subject mb-1">{{notif.sender}} || {{notif.content}}</p>
+              <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notif.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
+              <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" *ngIf="notif.timestamp == now"> aujourd'huit{{notif.timestamp| date:'HH:mm'}}</small>
+            </div>
+            
+      
+              <!--notification des propositions -->
+            
+              <div class="preview-thumbnail" *ngIf="notif.type == 'proposition' ">
+                <div class="preview-icon bg-dark rounded-circle">
+                  <i class="mdi mdi-reply text-success"></i>
+                </div>
+              </div>
+              <div class="preview-item-content" *ngIf="notif.type == 'proposition' ">
+                <p class="preview-subject text-muted ellipsis mb-1">Proposition de la Bank </p>
+                <p class="preview-subject mb-1">{{notif.sender}} || {{notif.content}}</p>
+                <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notif.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
+                <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" *ngIf="notif.timestamp == now"> aujourd'huit{{notif.timestamp| date:'HH:mm'}}</small>
+              </div>
+              
+          </a>
+        </div>
+        </div>
+    </li>
+    <li class="nav-item">
+      <div class="btn-group nav-link">
+        <a type="button" class="text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           {{userName}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <button class="dropdown-item" type="button" (click)="logoutAndQuit()"><mat-icon>logout</mat-icon>Déconnexion</button>
+        </div>
       </div>
-    </nav>
-    <!-- partial -->
-    <div class="main-panel">
-      <div class="content-wrapper">
-          <router-outlet></router-outlet>
-      </div>
-    </div>
-    <!-- main-panel ends -->
-  </div>
-  <!-- page-body-wrapper ends -->
-</div>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </li>-->
+  </ul>
+  
+</mat-toolbar>
+<mat-sidenav-container class="example-container" autosize>
+	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+		<mat-nav-list>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/dashboard']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Dashboard</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-success">dashboard</mat-icon>
+			</mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/list']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_ENCHERE'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Les enchères</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-success">list_alt</mat-icon>
+			</mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/propositionList']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Mes enchères</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-warning">list_alt</mat-icon>
+			</mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/ajoutEnchere']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Lancer une enchère</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-info">library_add</mat-icon>
+			</mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/positionChange']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Position de change</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-primary">home</mat-icon>
+			</mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/convertisseur']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Convertisseur</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-primary">home</mat-icon>
+			</mat-list-item>
+			<!--<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent text-white">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Parent Menu</span>
+				<mat-icon mat-list-icon>home</mat-icon>
+				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+			</mat-list-item>
+			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+				<a class="text-white" mat-list-item href="...">Submenu Item 1</a>
+				<a class="text-white" mat-list-item href="...">Submenu Item 2</a>
+				<mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+					<span class="full-width" *ngIf="isExpanded || isShowing">Nested Menu</span>
+					<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+				</mat-list-item>
+				<div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
+					<mat-list-item>SubSubmenu Item 1</mat-list-item>
+					<mat-list-item>SubSubmenu Item 2</mat-list-item>
+				</div>
+			</div>-->
+		</mat-nav-list>
+    <mat-nav-list>
+</mat-nav-list>
+	</mat-sidenav>
+
+	<router-outlet class="p-2"></router-outlet>
+
+</mat-sidenav-container>
