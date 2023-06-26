@@ -1,0 +1,70 @@
+/**===== Custom style ======**/
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  table {
+    width: 100%;
+    margin-bottom: 50px;
+    background-color: #191C24;
+  }
+  .table td{
+    padding-left: 0px;
+    padding-right: 0px;
+    border: none
+  
+  }
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #152B39;
+    font-family: Courier, monospace;
+    font-size: 14px;
+    color:#ccc; 
+  }
+  
+  .wrapper {
+    display: block;
+    margin: 5em auto;
+    border: 1px solid #555;
+    width: 700px;
+    height: 350px;
+    position: relative;
+  }
+  p{text-align:center;}
+  .label {
+    height: 1em;
+    padding: .3em;
+    background: rgba(255, 255, 255, .8);
+    position: absolute;
+    display: none;
+    color:#333;
+    
+  }
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .table th{
+    padding-left: 20px;
+    padding-right: 0px;
+    /*width: 100px*/
+  }
+  
+  .col-md-12{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .color-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  input{
+    background: #2c3034;
+    border: #2c3034 2px;
+    color: white;
+}
+
+
+
+ 

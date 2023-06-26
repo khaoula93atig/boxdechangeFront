@@ -1,1 +1,63 @@
-<p class="m-3 bg-danger">position-change works!</p>
+<div class="card m-2">
+    <div class="card-body">
+        <h4 class="card-title" style="font-size: 30px;
+        margin-bottom: 35px;">Gestion de la position de change</h4>
+</div>
+<div class="table-responsive-sm">
+<table class="table table-dark table-dashboard m-2" >
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">EUR</th>
+        <th scope="col">USD</th>
+        <th scope="col">GBP</th>
+        <th scope="col">JPY</th>
+        <th scope="col">SAR</th>
+        <th scope="col">AED</th>
+        <th scope="col">CAD</th>
+        <!--<th scope="col">Last</th>
+        <th scope="col">Handle</th>-->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of ventes">
+        <th scope="row">vente</th>
+        <td>{{v.deviseeur| number:'1.3-3'}}</td>
+        <td>{{v.deviseusd| number:'1.3-3'}}</td>
+        <td>{{v.devisegbp| number:'1.3-3'}}</td>
+        <td>{{v.devisejpy| number:'1.3-3'}}</td>
+        <td>{{v.devisesar| number:'1.3-3'}}</td>
+        <td>{{v.deviseaed| number:'1.3-3'}}</td>
+        <td>{{v.devisecad| number:'1.3-3'}}</td>
+      </tr>
+      <tr>
+        <th scope="row">mes devises</th>
+        <td><input type="text"  [(ngModel)]="inputEur" (input)="TransferEurToTnd()"  ></td>
+        <td><input type="text"  [(ngModel)]="inputUsd" (keyup)="TransferUsdToTnd()"></td>
+        <td><input type="text"  [(ngModel)]="inputGbp" (keyup)="TransferGbpToTnd()"></td>
+        <td><input type="text"  [(ngModel)]="inputJpy" (keyup)="TransferJpyToTnd()"></td>
+        <td><input type="text"  [(ngModel)]="inputSar" (keyup)="TransferSarToTnd()"></td>
+        <td><input type="text"  [(ngModel)]="inputAed" (keyup)="TransferAedToTnd()"></td>
+        <td><input type="text"  [(ngModel)]="inputCad" (keyup)="TransferCadToTnd()"></td>
+      </tr>
+      <tr>
+        <th scope="row">TND</th>
+        <td><input type="number" class="bg-dark" [(ngModel)]="eurToTnd"  readonly></td>
+        <td><input type="number" class="bg-dark" [(ngModel)]="usdToTnd" readonly></td>
+        <td><input type="number" class="bg-dark" [(ngModel)]="gbpToTnd" readonly></td>
+        <td><input type="number" class="bg-dark" [(ngModel)]="jpyToTnd" readonly></td>
+        <td><input type="number" class="bg-dark" [(ngModel)]="sarToTnd" readonly></td>
+        <td><input type="number" class="bg-dark" [(ngModel)]="aedToTnd" readonly></td>
+        <td><input type="number" class="bg-dark" [(ngModel)]="cadToTnd" readonly></td>
+      </tr>
+      <tr>
+        <th scope="row">Totale en TND</th>
+        <td colspan="7">{{totalDevise}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="alert alert-dark m-3" role="alert">
+    Pour avoir un équilibre il faut avoir :  <a class="alert-link">{{percentEur|currency:'EUR':'symbol'}}</a> et <a class="alert-link">{{percentUsd |currency:'USD':'symbol'}}</a>
+  </div>
+</div>

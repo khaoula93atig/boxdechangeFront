@@ -8,24 +8,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import {StockChart} from 'angular-highcharts';
 import { CurrencyPipe } from '@angular/common';
-
-/*declare var require: any;
-const More = require('highcharts/highcharts-more');
-More(Highcharts);
-
-const Exporting = require('highcharts/modules/exporting');
-Exporting(Highcharts);
-
-const ExportData = require('highcharts/modules/export-data');
-ExportData(Highcharts);
-
-const Accessibility = require('highcharts/modules/accessibility');
-Accessibility(Highcharts);
-const Stock = require('highcharts/modules/stock');
-Stock(Highcharts);*/
-
-
-
+import * as Highcharts from 'highcharts';
 
 
 @Component({
@@ -34,6 +17,7 @@ Stock(Highcharts);*/
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<Vente>
   displayedColumns = ['nomBanque', 'AED', 'EUR', 'LYD', 'BHD', 'SAR', 'CAD', 'DKK', 'USD', 'GBP', 'JPY', 'NOK', 'SEK', 'CHF', 'KWD', 'QAR', 'CNY'];
@@ -218,6 +202,13 @@ getAverge(event){
       tab.push([date,r.devise])
     }
     console.log(tab)
+
+    //ordonnées les données pour avoir une seule ligne contenue
+    tab.sort((a, b) => a[0] - b[0]);
+
+    const minValue = Math.min(...tab.map(data => data[1]));
+    const maxValue = Math.max(...tab.map(data => data[1]));
+    
   this.stock = new StockChart({
     rangeSelector: {
       selected: 1
@@ -228,12 +219,19 @@ getAverge(event){
     chart:{
       backgroundColor:"none"
     },
+    yAxis: {
+      min: minValue,
+      max: maxValue
+    },
+    xAxis: {
+      type: 'datetime'
+    },
     series: [{
       tooltip: {
-        valueDecimals: 2
+        valueDecimals: 3
       },
       name: this.headerValue,
-      type: 'areaspline',
+      type: "areaspline",
       data: tab,
       dataGrouping: {
         units: [[

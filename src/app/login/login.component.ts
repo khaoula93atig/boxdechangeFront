@@ -22,19 +22,20 @@ export class LoginComponent implements OnInit {
      private router: Router) { }
 
   ngOnInit(): void {
-   /* if (this.tokenStorage.getToken()) {
+   /*if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
     }*/
   }
   onSubmit(): void {
+    console.log(this.form)
     this.authService.login(this.form).subscribe(
       data => {
-        console.log(data.accessToken)
-        this.tokenStorage.saveUser(data);
+        console.log(data)
+        /*this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
+        this.isLoggedIn = true;*/
+        this.roles = this.authService.currentUserValue.roles;
         console.log(this.roles)
         this.toastr.success('Connection approuvée','Bienvennue!!' );
         if(this.roles.find(element => element ='ROLE_ENCHERE')=='ROLE_ENCHERE'){

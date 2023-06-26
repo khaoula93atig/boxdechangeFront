@@ -7,6 +7,7 @@ import { WebsocketsService } from 'src/app/services/websockets.service';
 import { WebSocketSubject } from 'rxjs/webSocket';
 import { NotificationService } from 'src/app/services/notification.service';
 import * as bootstrap from 'bootstrap';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -19,6 +20,7 @@ export class MenuComponent implements OnInit {
   notification= new notifications;
   notifications:notifications[]=[]
   constructor(   private tokenStorage: TokenStorageService,
+    private authService:AuthService,
     private router: Router,
     private stompService: RxStompService,
     private notificationService:NotificationService) {
@@ -85,10 +87,7 @@ export class MenuComponent implements OnInit {
     // ...
 
     // Quit the application
-    this.tokenStorage.signOut()
-    this.router.navigateByUrl('/');
-
-    window.close();
+    this.authService.logout()
   }
 
   readNotification(){

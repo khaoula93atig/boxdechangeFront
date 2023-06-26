@@ -69,6 +69,10 @@ export class VenteService {
   return this.http.get<any[]>(this.apiAverage+"/getByDevise/"+devise)
   }
 
+  getAverageDaily():Observable<any[]>{
+    return this.http.get<any[]>(this.apiAverage+"/getAvgDaily")
+    }
+
 
   
 }

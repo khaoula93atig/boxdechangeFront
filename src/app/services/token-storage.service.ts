@@ -85,7 +85,7 @@ export class TokenStorageService {
 
 
   loggedIn() {
-    return !!this.getToken();
+    return !!this.getUser();
   }
 
   signOut(): void {

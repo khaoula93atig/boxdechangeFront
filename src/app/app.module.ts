@@ -36,6 +36,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PositionChangeComponent } from './position-change/position-change.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CdkColumnDef, CdkTableModule } from '@angular/cdk/table';
+import { HighchartsChartModule } from "highcharts-angular";
 
 
 
@@ -74,12 +77,15 @@ import { PositionChangeComponent } from './position-change/position-change.compo
     MatListModule,
     MatExpansionModule,
     MatTooltipModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    CdkTableModule,
+    HighchartsChartModule
    // AngularFireModule.
     
   ],
   providers: [authInterceptorProviders,VenteService, 
-    WebsocketsService,
+    WebsocketsService,CdkColumnDef,
     {
       provide: InjectableRxStompConfig,
       useValue: myRxStompConfig,

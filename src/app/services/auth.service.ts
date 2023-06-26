@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Token } from '../models/Token';
 import {map} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 const AUTH_API =  environment.URL+ '/api/auth/';
 
@@ -19,7 +20,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<Token>;
   public currentUser: Observable<Token>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router:Router) {
     this.currentUserSubject = new BehaviorSubject<Token>(
       JSON.parse(localStorage.getItem('auth-user'))
     );
@@ -27,10 +28,22 @@ export class AuthService {
    }
 
   login(credentials): Observable<any>{
-    return this.http.post(AUTH_API + 'signin', {
+    return this.http.post<any>(AUTH_API + 'signin', {
       username: credentials.username,
       password: credentials.password
-    }, httpOptions);
+    }).pipe(
+      map((user) => {
+        console.log('////////////' + user);
+        if (user && user.accessToken) {
+          localStorage.setItem('auth-user', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+        }
+      })
+    );
+    /*return this.http.post(AUTH_API + 'signin', {
+      username: credentials.username,
+      password: credentials.password
+    }, httpOptions);*/
   }
 
   register(user): Observable<any> {
@@ -51,4 +64,10 @@ export class AuthService {
   public get currentUserValue(): Token {
     return this.currentUserSubject.value;
   }
+  logout() {
+    console.log(JSON.parse(localStorage.getItem('auth-user')))
+    localStorage.removeItem('auth-user');
+    this.router.navigate(['']);
+  }
+
 }
