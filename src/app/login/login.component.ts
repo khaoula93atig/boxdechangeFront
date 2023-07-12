@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit {
         if (this.roles.find(element => element ='ROLE_BANK')=='ROLE_BANK'){
           this.router.navigate(['/dash/list'])
         }
+        if (this.roles.find(element => element ='ROLE_ADMIN')=='ROLE_ADMIN'){
+          this.router.navigate(['/dash/box'])
+        }
         
       },
       err => {

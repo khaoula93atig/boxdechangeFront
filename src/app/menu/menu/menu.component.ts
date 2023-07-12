@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
     private router: Router,
     private stompService: RxStompService,
     private notificationService:NotificationService) {
-      const url = `/socket/notif/`
+      /*const url = `/socket/notif/`
       this.stompService.watch(url).subscribe(res => {
        
         const data: notifications = JSON.parse(res.body)
@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
         console.log("***** test tta",this.notification)
         this.notifications.push(this.notification)
         this.nbr++ 
-     })
+     })*/
     }
   roles =[]
   role : any;
@@ -63,7 +63,8 @@ export class MenuComponent implements OnInit {
         const data: notifications = JSON.parse(res.body)
         
         this.notification=data;
-        this.notifications.push(this.notification)
+        //this.notifications.push(this.notification)
+        console.log("notif test",this.notifications)
         this.nbr++ 
      })
 

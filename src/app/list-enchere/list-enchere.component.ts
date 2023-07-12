@@ -57,9 +57,9 @@ export class ListEnchereComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId=this.tokenStorage.getUser().id
-    setInterval(() => { this.GetAllEnchere()}, 1000)
+    //setInterval(() => { this.GetAllEnchere()}, 1000)
     
-    //this.GetAllEnchere()
+    this.GetAllEnchere()
     this.propositionService.GetAll().subscribe(res=>{
       console.log(res);
     },(err)=>{

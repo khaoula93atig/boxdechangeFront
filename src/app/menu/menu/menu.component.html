@@ -11,7 +11,7 @@
           <mat-icon>notifications</mat-icon>
           <span *ngIf="nbr!=0" class="badge badge-danger badge-counter count bg-danger">{{nbr}}</span>
         </a>
-        <div *ngFor="let notif of notifications" class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
           <h6 class="p-3 mb-0"> Notifications</h6>
           <div class="dropdown-divider"></div>
           <!-- new notification des encheres -->
@@ -32,17 +32,17 @@
           <a *ngIf="notification.type == 'proposition' && notification!= null " class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
-                <i class="mdi mdi-gavel text-success"></i>
+                <i class="mdi mdi-reply text-success"></i>
               </div>
             </div>
             <div class="preview-item-content">
-              <p class="preview-subject text-muted ellipsis mb-1">Proposition de la Bank </p>
+              <p class="preview-subject text-muted ellipsis mb-1">Nouvelle proposition</p>
               <p class="preview-subject mb-1">{{notification.sender}} || {{notification.content}}</p>
               <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notification.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
             </div>
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item" >
+          <a class="dropdown-item preview-item" *ngFor="let notif of notifications">
       
             <!-- notification des encheres -->
             
@@ -57,7 +57,7 @@
               <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notif.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
               <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" *ngIf="notif.timestamp == now"> aujourd'huit{{notif.timestamp| date:'HH:mm'}}</small>
             </div>
-            
+            <div class="dropdown-divider"></div>
       
               <!--notification des propositions -->
             
@@ -72,7 +72,7 @@
                 <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" >{{notif.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
                 <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0" *ngIf="notif.timestamp == now"> aujourd'huit{{notif.timestamp| date:'HH:mm'}}</small>
               </div>
-              
+              <div class="dropdown-divider"></div>
           </a>
         </div>
         </div>
@@ -99,11 +99,43 @@
 <mat-sidenav-container class="example-container" autosize>
 	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
 		<mat-nav-list>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/box']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ADMIN'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Box</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-success">dashboard</mat-icon>
+			</mat-list-item>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/bank']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ADMIN'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Bank</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-success">dashboard</mat-icon>
+			</mat-list-item>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/bank']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ADMIN'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Users</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-success">dashboard</mat-icon>
+			</mat-list-item>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/box']"
+      routerLinkActive
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ADMIN'">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Ajout user</span>
+				<mat-icon mat-list-icon class="sidebar-icon text-success">dashboard</mat-icon>
+			</mat-list-item>
       <mat-list-item class="parent text-item active" [routerLink]="['/dash/dashboard']"
       routerLinkActive
            #routerLinkActiveInstance="routerLinkActive"
            [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
-      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Dashboard</span>
 				<mat-icon mat-list-icon class="sidebar-icon text-success">dashboard</mat-icon>
 			</mat-list-item>
@@ -111,7 +143,7 @@
       routerLinkActive
            #routerLinkActiveInstance="routerLinkActive"
            [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
-      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_ENCHERE'">
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_BANK'">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Les enchères</span>
 				<mat-icon mat-list-icon class="sidebar-icon text-success">list_alt</mat-icon>
 			</mat-list-item>
@@ -119,7 +151,7 @@
       routerLinkActive
            #routerLinkActiveInstance="routerLinkActive"
            [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
-      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Mes enchères</span>
 				<mat-icon mat-list-icon class="sidebar-icon text-warning">list_alt</mat-icon>
 			</mat-list-item>
@@ -127,7 +159,7 @@
       routerLinkActive
            #routerLinkActiveInstance="routerLinkActive"
            [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
-      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Lancer une enchère</span>
 				<mat-icon mat-list-icon class="sidebar-icon text-info">library_add</mat-icon>
 			</mat-list-item>
@@ -135,7 +167,7 @@
       routerLinkActive
            #routerLinkActiveInstance="routerLinkActive"
            [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
-      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Position de change</span>
 				<mat-icon mat-list-icon class="sidebar-icon text-danger">
           currency_exchange</mat-icon>
@@ -144,7 +176,7 @@
       routerLinkActive
            #routerLinkActiveInstance="routerLinkActive"
            [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1" 
-      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role!='ROLE_BANK'">
+      [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Convertisseur</span>
 				<mat-icon mat-list-icon class="sidebar-icon text-primary">home</mat-icon>
 			</mat-list-item>

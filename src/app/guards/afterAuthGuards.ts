@@ -16,6 +16,8 @@ export class AfterAuthGuard implements CanActivate{
             this.router.navigateByUrl('/dash/dashboard')
             else if(this.authService.currentUserValue.roles.find(element => element ='ROLE_BANK')=='ROLE_BANK')
                 this.router.navigate(['/dash/list'])
+            else if(this.authService.currentUserValue.roles.find(element => element ='ROLE_ADMIN')=='ROLE_ADMIN')
+            this.router.navigate(['/dash/box'])
         }
         return true;
     }

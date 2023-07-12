@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import { ListEnchereComponent } from './list-enchere/list-enchere.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormEnchereComponent } from './form/form-enchere/form-enchere.component';
 import { LoginComponent } from './login/login.component';
 import { authInterceptorProviders } from './services/auth.interceptor';
@@ -39,6 +39,8 @@ import { PositionChangeComponent } from './position-change/position-change.compo
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CdkColumnDef, CdkTableModule } from '@angular/cdk/table';
 import { HighchartsChartModule } from "highcharts-angular";
+import { BoxComponent } from './box/box.component';
+import { BankComponent } from './bank/bank.component';
 
 
 
@@ -54,7 +56,9 @@ import { HighchartsChartModule } from "highcharts-angular";
     ConvertisseurComponent,
     DashboardComponent,
     SortPipe,
-    PositionChangeComponent
+    PositionChangeComponent,
+    BoxComponent,
+    BankComponent
     
   ],
   imports: [
@@ -63,6 +67,7 @@ import { HighchartsChartModule } from "highcharts-angular";
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot(),
     MatTableModule,
     MatSortModule,

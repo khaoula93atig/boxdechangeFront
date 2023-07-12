@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import { PropositionListComponent } from './proposition-list/proposition-list.component';
 import { PositionChangeComponent } from './position-change/position-change.component';
+import { BoxComponent } from './box/box.component';
+import { BankComponent } from './bank/bank.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent, canActivate:[AfterAuthGuard]},
@@ -20,7 +22,9 @@ const routes: Routes = [
     {path:'ajoutEnchere', component:FormEnchereComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}},
     {path:'convertisseur', component:ConvertisseurComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}},
     {path:'propositionList', component:PropositionListComponent ,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}},
-    {path:'positionChange', component:PositionChangeComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}}
+    {path:'positionChange', component:PositionChangeComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ENCHERE'}},
+    {path:'box', component:BoxComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
+    {path:'bank', component:BankComponent,canActivate:[AuthGuard,RoleGuard],data:{role:'ROLE_ADMIN'}},
 
   ]},
   
