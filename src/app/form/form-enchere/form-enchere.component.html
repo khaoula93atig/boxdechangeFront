@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="col-lg-8">
+      <div class="card" style="    padding: 1.75rem 1.5625rem;">
+        <div class="title-icon" style=" display: flex;">
+          <mat-icon mat-list-icon class="sidebar-icon" style="color: #f53f44;  margin: 0px 18px 0px 5px;
+          font-size: 30px;">
+            library_add</mat-icon>
+          <h4 class="card-title" style="font-size: 30px; margin-bottom: 35px;"> Lancer enchère</h4>
+
+        </div>
+
+        <div class="card-body">
+          <form #myForm="ngForm" required class="forms-sample">
+            <!--<div class="form-group row">
+              <label for="referenceEnchere" class="col-sm-3 col-form-label">Ref Enchère:</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="referenceEnchere"
+       [(ngModel)]="referenceEnchereValue "
+       name="referenceEnchere" >
+</div>
+            </div>-->
+
+
+            <!--<div class="form-group row">
+              <label class="col-sm-3 col-form-label">Sens d'enchère:</label>
+              <div class="col-sm-9">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="sensEnchere" id="venteRadio" ngModel value="vente" checked>
+                  <label class="form-check-label" for="venteRadio">
+                    Vente
+                  </label>
+                </div>
+              </div>
+            </div>-->
+            <div class="form-group row">
+              <label for="devise" class="col-sm-3 col-form-label">Devise:</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="devise" ngModel name="devise">
+                  <option selected>Choisir devise</option>
+                  <option value="AED">AED</option>
+                  <option value="EUR">EUR</option>
+                  <option value="BHD">BHD</option>
+                  <option value="SAR">SAR</option>
+                  <option value="CAD">CAD</option>
+                  <option value="DKK">DKK</option>
+                  <option value="USD">USD</option>
+                  <option value="GBP">GBP</option>
+                  <option value="JPY">JPY</option>
+                  <option value="NOK">NOK</option>
+                  <option value="SEK">SEK</option>
+                  <option value="KWD">KWD</option>
+                  <option value="QAR">QAR</option>
+                  <option value="CNY">CNY</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="montantEnchere" class="col-sm-3 col-form-label">Montant:</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" placeholder="Montant" min="0" ngModel name="montantEnchere"
+                  required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="dateDebut" class="col-sm-3 col-form-label">Date Début:</label>
+              <div class="col-sm-9">
+                <input type="date" class="form-control" id="dateDebut" ngModel name="date" placeholder="Date début"
+                  required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="heureDebut" class="col-sm-3 col-form-label">Heure début:</label>
+              <div class="col-sm-9">
+                <input type="datetime-local" class="form-control" id="dateDebut" name="dateDebut" ngModel min="08:00"
+                  max="19:00" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="heureFin" class="col-sm-3  col-form-label">Heure fin:</label>
+              <div class="col-sm-9">
+                <input type="datetime-local" class="form-control" ngModel id="heureFin" name="heureFin" min="08:00"
+                  max="19:00" required>
+              </div>
+            </div>
+
+
+            <!--  <div class="col-lg-9">
+              <label for="cheese" style="font-size: 12px">Description</label>
+              <textarea rows="5" fullWidth shape="round" placeholder="Description" ngModel
+                name="description"></textarea>
+            </div>
+          -->
+            <div class="">
+              <!-- <div class="col-sm-8">
+
+                <button type="button" class="btn btn-warning btn-rounded" style="float: right;"> Sauvegarder </button>
+
+
+              </div> -->
+              <div class="">
+                <div class="form-group" style="float: right;">
+                  <button type="button" class="btn btn-info btn-rounded" (click)="saveEnchere(myForm)"
+                    [disabled]="!myForm.valid" style=" border-radius: 2px; background-color: #364490; border: #364490;">
+                    Lancer maintenant
+                  </button>
+
+
+
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

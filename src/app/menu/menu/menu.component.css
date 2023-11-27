@@ -1,0 +1,136 @@
+.example-container {
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    overflow: hidden !important;
+    background-color: #262935;
+  }
+  .example-toolbar{
+    background-color: #1a1c24;
+  }
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden !important;
+  }
+  .example-sidenav {
+     user-select: none;
+     background-color: #1a1c24;;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .menu-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+  }
+  .menu-button.rotated {
+    transform: rotate(180deg);
+  }
+  .submenu {
+    overflow-y: hidden;
+    transition: transform 300ms ease;
+    transform: scaleY(0);
+    transform-origin: top;
+    padding-left: 30px;
+  }
+  .submenu.expanded {
+    transform: scaleY(1);
+  }
+  .mat-drawer-content {
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 100%;
+    overflow: hidden !important;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    display: flex;
+    box-sizing: border-box;
+    padding: 6px 16px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+}
+a{
+    text-decoration: none;
+}
+.list-item-active {
+  color: white !important;
+  background: #0f1015;
+    position: relative;
+}
+.text-item{
+  color:#6c7293;
+}
+.sidebar-icon{
+  margin-right: 0.5rem;
+    font-size: 0.8125rem;
+    line-height: 1;
+    background: rgba(108, 114, 147, 0.2);
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+/* -----------------------------------------
+   Dropdown
+----------------------------------------- */
+.dropdown-menu{
+    padding:0 0 0 0;
+}
+a.dropdown-menu-header {
+    background: #f7f9fe;
+    font-weight: bold;
+    border-bottom: 1px solid #e3e3e3;
+}
+.dropdown-menu > li a {
+    padding: 10px 20px;
+}
+
+/* -----------------------------------------
+   Badge
+----------------------------------------- */
+
+.badge{
+    padding: 3px 5px 2px;
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    display: inline-block;
+    min-width: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+}
+.badge-danger {
+    background-color: #db5565;
+}
+
+.mat-list-base .mat-list-item .mat-list-icon, .mat-list-base .mat-list-option .mat-list-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  font-size: 20px;
+  box-sizing: content-box;
+  border-radius: 50%;
+  padding: 4px;
+}
+span{
+  font-size: 0.9375rem;
+}

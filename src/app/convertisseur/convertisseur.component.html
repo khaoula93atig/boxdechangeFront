@@ -1,0 +1,101 @@
+<div class="container container-conv">
+  <div class="card card-body">
+    <div class="title-icon" style=" display: flex;">
+
+        <mat-icon mat-list-icon class="sidebar-icon" style="color: #cddc39;  margin: 0px 18px 0px 5px;
+        font-size: 30px;">
+          calculate</mat-icon>
+      <h4 class="card-title" style="font-size: 30px;
+          margin-bottom: 35px;">Convertisseur</h4>
+    </div>
+    <div class="card-title m-3" style="    font-size: 23px; font-weight: 600;">
+      {{montant|currency:' ':'symbol'}} {{deviseAconvertir}} <mat-icon class="material-symbols-outlined">
+        arrow_right_alt
+      </mat-icon> {{deviseAconvertirEn}} : Convertir de {{deviseEnlettreAconvertir}} En {{deviseEnlettreAconvertirEn}}
+    </div>
+    <div class="card-body grid-devise">
+      <mat-grid-list cols="7" rowHeight="110px" gutterSize="10px">
+
+        <mat-grid-tile class="text-white" colspan="2">
+          <mat-grid-tile-header>
+            <mat-label class="text-white">Montant à Convertir</mat-label>
+          </mat-grid-tile-header>
+          <mat-grid-tile-footer>
+            <mat-form-field class="example-full-width">
+              <!--<mat-label class="text-white">Montant à Convertir</mat-label>-->
+              <input #montantInput matInput type="text" mvndrMatCurrencyFormat
+                [allowNegative]="false" [currencyCode]="deviseAconvertir" [value]="montant"
+                (blur)="updateUSAmount($event); convert()"  style=" font-size: 20px;"/>
+            </mat-form-field>
+          </mat-grid-tile-footer>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile class="text-white" colspan="2">
+          <mat-grid-tile-header>
+            <mat-label class="text-white ">De</mat-label>
+          </mat-grid-tile-header>
+          <mat-grid-tile-footer>
+            <mat-form-field appearance="outline">
+              <!--<mat-label class="text-white ">De</mat-label>-->
+              <mat-select class=" color-text" [(ngModel)]="deviseAconvertir" (ngModelChange)="onCurrencySelect($event)">
+                <mat-option *ngFor="let currency of currencies" [value]="currency.code">
+                  <span class="flag-icon flag-icon-{{ currency.flag }}"></span>
+                  {{ currency.name }} ({{ currency.code }})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile-footer>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile class="text-white" colspan="1" >
+          <mat-grid-tile-footer style="border-radius: 3px;
+          width: 50px; background-color: #364490; margin: 4px auto; height: 60px;">
+            <button type="button" class="btn btn-primary btn-conv" (click)="changeDevise();convert()"
+              style="    padding: 17px; ;">
+              <mat-icon class="material-symbols-outlined">
+                sync_alt
+              </mat-icon></button>
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+
+        <mat-grid-tile class="text-white" colspan="2">
+          <mat-grid-tile-header>
+            <mat-label class="text-white">En</mat-label>
+          </mat-grid-tile-header>
+          <mat-grid-tile-footer>
+            <mat-form-field appearance="outline">
+              <!--<mat-label class="text-white">En</mat-label>-->
+              <mat-select class=" color-text" [(value)]="deviseAconvertirEn"
+                (selectionChange)="onCurrencySelect1($event.value)">
+                <mat-option *ngFor="let currency of currencies" [value]="currency.code">
+                  <span class="flag-icon flag-icon-{{ currency.flag }}"></span>
+                  {{ currency.name }} ({{ currency.code }})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </mat-grid-tile-footer>
+
+
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </div>
+    <div class="card-footer">
+
+      <button type="button" class="btn btn-primary" style="background-color: #364490; border-color:#364490 ;
+          float: right; padding: 10px 50px;"
+        (click)="convert()">
+        Convertir</button>
+      <div class="m-3" style="color: #6c7293" *ngIf="montantConvertis!=0"> {{montant|currency:' ':'symbol'}}
+        {{deviseEnlettreAconvertir}} = <br>
+        <h2 class="text-white">{{montantConvertis|currency:' ':'symbol'}} {{deviseEnlettreAconvertirEn}}</h2>
+        1 {{deviseAconvertir}}={{standardDevise}} {{deviseAconvertirEn}}<br>
+        1 {{deviseAconvertirEn}}={{standarTnd}} {{deviseAconvertir}}
+      </div>
+    </div>
+  </div>
+</div>

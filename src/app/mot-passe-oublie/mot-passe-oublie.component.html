@@ -1,0 +1,54 @@
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="row w-100 m-0">
+        <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+          <div class="card col-lg-4 mx-auto">
+            <div class="card-body px-5 py-5">
+              <h3 class="card-title text-left mb-3">Rest Mot de passe</h3>
+              <form name="form" [formGroup]="mdpForm" novalidate>
+                <div class="form-group">
+                  <label>Nouveau Mot de passe *</label>
+                  <input type="text" class="form-control p_input"  type="password"
+                  [ngClass]="{
+   'is-valid': mdpForm.get('password').valid,
+   'is-invalid': mdpForm.get('password').invalid  && (mdpForm.get('password').touched || mdpForm.get('password').dirty)
+ }" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Entrer le nouveau mot de passe..."
+                  name="password" formControlName="password">
+           <div
+             *ngIf="mdpForm.get('password').invalid && (mdpForm.get('password').touched || mdpForm.get('password').dirty)"
+             Class="invalid-feedback">
+             <div *ngIf="mdpForm.get('password').getError('required')">champs obligatoire!</div>
+           </div>
+                </div>
+                <div class="form-group">
+                  <label>Confirmation de Mot de passe *</label>
+                  <input type="password" class="form-control p_input" 
+                  [ngClass]="{
+                    'is-valid': mdpForm.get('confirmPassword').valid,
+                    'is-invalid': mdpForm.get('confirmPassword').invalid  && (mdpForm.get('confirmPassword').touched || mdpForm.get('confirmPassword').dirty)
+                  }" type="password" id="exampleInputPassword" placeholder="Confirmer le mot de passe" name="confirmPassword"
+                                                         formControlName="confirmPassword">
+                            <div
+                              *ngIf="mdpForm.get('confirmPassword').invalid && (mdpForm.get('confirmation').touched || mdpForm.get('confirmPassword').dirty)"
+                              Class="invalid-feedback">
+                              <div *ngIf="mdpForm.get('confirmPassword').getError('required')">champs obligatoire!</div>
+                            </div>
+                            <div *ngIf="mdpForm.get('confirmPassword').getError('MustMatch')">Passwords must match</div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-block enter-btn" (click)="confirmer()">Confirmer</button>
+                </div>
+                
+
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+      </div>
+      <!-- row ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+  

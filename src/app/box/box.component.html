@@ -1,0 +1,260 @@
+<div class="text-right m-3">
+  <button type="button" class="btn btn-primary" style="background-color: #364490; border-color:#364490 ;" 
+  (click)="openDialogueAjout()"
+  >Ajouter box</button></div>
+
+<table mat-table [dataSource]="dataSource" style="color: white; min-width: 100%;" class="table  table-dashboard m-3" 
+style="background-color: #1a1c24;">
+
+  
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> id </th>
+    <td mat-cell *matCellDef="let element" style=" font-weight: 700;"> {{element.idbox}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Nom </th>
+    <td mat-cell *matCellDef="let element" style=" font-weight: 700;"> {{element.boxName}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="adresse">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Adresse </th>
+    <td mat-cell *matCellDef="let element"> {{element.adresse}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="telephoneBox">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Tel box </th>
+    <td mat-cell *matCellDef="let element"> {{element.boxTelephone}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="responsable">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Responsable </th>
+    <td mat-cell class="align-self-center" *matCellDef="let element"> {{element.nomResponsable}} {{element.prenomResponsable}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Email </th>
+    <td mat-cell class="align-self-center" *matCellDef="let element"> {{element.emailResponsable}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="telephoneResponsable">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Tel Responsable </th>
+    <td mat-cell *matCellDef="let element"> {{element.telephoneResponsable}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="contrat">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Contrat </th>
+    <td mat-cell class="align-self-center" *matCellDef="let element"> {{element.contrat}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateContrat">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Date du contrat </th>
+    <td mat-cell class="align-self-center" *matCellDef="let element"> {{element.dateDebutContrat | date:'dd-MM-yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Status </th>
+    <td mat-cell class="align-self-center" *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef class="pb-2"> Action </th>
+    <td mat-cell class="align-self-center" *matCellDef="let element">
+       <button type="button" class="btn btn-primary" (click)="getBox(element);openDialogueModifier()"
+       style="background-color: #364490; border-color:#364490 ;" >
+       <mat-icon mat-list-icon class="sidebar-icon">
+        edit_square
+        </mat-icon></button> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator style="color: #e6eaff;" [pageSizeOptions]="[10, 20, 40, 100]"></mat-paginator>
+
+
+<!--dialogue ajout-->
+
+<div class="modal model-bank" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color: white">Ajout box</h4>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <form class="forms-sample" #myForm="ngForm">
+              <div class="row">
+              <div class="form-group col-6 ">
+                <label for="boxName" style="color : rgb(255,255,255)">Nom</label>
+                <input type="text" class="form-control" name="boxName" [(ngModel)]="box.boxName" ngModel required>
+              </div>
+              <div class="form-group col-6">
+                <label for="adresse" style="color : rgb(255,255,255)">Adresse</label>
+                <input type="text" class="form-control" name="adresse" [(ngModel)]="box.adresse" required>
+              </div>
+              </div>
+              <div class="row">
+              <div class="form-group col-6">
+                <label style="color : rgb(255,255,255)" for="telephoneBox">Téléphone du box</label>
+                <input type="text" #boxTelephoneInput="ngModel" pattern="[- +()0-9]+" class="form-control" name="boxTelephone" [(ngModel)]="box.boxTelephone" required>
+                <div *ngIf="boxTelephoneInput.invalid && boxTelephoneInput.dirty"
+                class="alert alert-danger">
+                Veuillez saisir un numéro de téléphone valide</div>
+              </div>
+              <div class="form-group col-6">
+                <label style="color : rgb(255,255,255)" for="boxEmail">Email du box</label>
+                <input #boxEmailInput="ngModel" type="email" class="form-control" name="boxEmail" [(ngModel)]="box.boxEmail" email required>
+                <div *ngIf="boxEmailInput.invalid && boxEmailInput.dirty"
+                class="alert alert-danger">
+                Veuillez saisir un email valide</div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="form-group col-6">
+                <label for="nomResponsable" style="color : rgb(255,255,255)">Nom Résponsable</label>
+                <input type="text" class="form-control" [(ngModel)]="box.nomResponsable" required  name="nomResponsable">
+              </div>
+              <div class="form-group col-6">
+                <label for="prenomResponsable" style="color : rgb(255,255,255)">Prénom Résponsable</label>
+                <input type="text" class="form-control" [(ngModel)]="box.prenomResponsable" required  name="prenomResponsable">
+              </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-6">
+                  <label for="telephoneResponsable" style="color : rgb(255,255,255)">Téléphone du Résponsable</label>
+                  <input type="text" class="form-control" [(ngModel)]="box.telephoneResponsable" required  name="telephoneResponsable">
+                </div>
+                <div class="form-group col-6">
+                  <label for="emailResponsable" style="color : rgb(255,255,255)">Email du Résponsable</label>
+                  <input #responsableEmailInput="ngModel" type="email" class="form-control" [(ngModel)]="box.emailResponsable" required email name="emailResponsable">
+                  <div *ngIf="responsableEmailInput.invalid && responsableEmailInput.dirty"
+                class="alert alert-danger">
+                Veuillez saisir un email valide</div>
+              </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-6">
+                    <label for="contrat" style="color : rgb(255,255,255)">Contrat</label>
+                    <input type="text" class="form-control" [(ngModel)]="box.contrat" required  name="contrat">
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="dateDebutContrat" style="color : rgb(255,255,255)">Date début du contrat</label>
+                    <input type="date" class="form-control" [(ngModel)]="box.dateDebutContrat" required  name="dateDebutContrat">
+                  </div>
+                  </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary mr-2"  (click)="ajoutBox();closeDialogueAjout()"
+             onClick="showMessage()" [disabled]="!myForm.valid" style="background-color: #364490; border-color:#364490 ;">Envoyer</button>
+          <button class="btn btn-dark" (click)="closeDialogueAjout()">Fermer </button>
+      </div> 
+    </div>
+  </div>
+
+</div>
+
+<!--dialogue update-->
+
+<div class="modal model-bank" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle1}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color: white">Modifier box {{boxUpadate.boxName}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <form class="forms-sample" #myFormUpdate="ngForm">
+              <div class="row">
+              <div class="form-group col-6 ">
+                <label for="boxName" style="color : rgb(255,255,255)">Nom</label>
+                <input type="text" class="form-control" name="boxName" [(ngModel)]="boxUpadate.boxName" ngModel required>
+              </div>
+              <div class="form-group col-6">
+                <label for="adresse" style="color : rgb(255,255,255)">Adresse</label>
+                <input type="text" class="form-control" name="adresse" [(ngModel)]="boxUpadate.adresse" required>
+              </div>
+              </div>
+              <div class="row">
+              <div class="form-group col-6">
+                <label style="color : rgb(255,255,255)" for="telephoneBox">Téléphone du box</label>
+                <input type="text" #boxTelephoneInput="ngModel" pattern="[- +()0-9]+" class="form-control" name="boxTelephone" [(ngModel)]="boxUpadate.boxTelephone" required>
+                <div *ngIf="boxTelephoneInput.invalid && boxTelephoneInput.dirty"
+                class="alert alert-danger">
+                Veuillez saisir un numéro de téléphone valide</div>
+              </div>
+              <div class="form-group col-6">
+                <label style="color : rgb(255,255,255)" for="boxEmail">Email du box</label>
+                <input #boxEmailInput="ngModel" type="email" class="form-control" name="boxEmail" [(ngModel)]="boxUpadate.boxEmail" email required>
+                <div *ngIf="boxEmailInput.invalid && boxEmailInput.dirty"
+                class="alert alert-danger">
+                Veuillez saisir un email valide</div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="form-group col-6">
+                <label for="nomResponsable" style="color : rgb(255,255,255)">Nom Résponsable</label>
+                <input type="text" class="form-control" [(ngModel)]="boxUpadate.nomResponsable" required  name="nomResponsable">
+              </div>
+              <div class="form-group col-6">
+                <label for="prenomResponsable" style="color : rgb(255,255,255)">Prénom Résponsable</label>
+                <input type="text" class="form-control" [(ngModel)]="boxUpadate.prenomResponsable" required  name="prenomResponsable">
+              </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-6">
+                  <label for="telephoneResponsable" style="color : rgb(255,255,255)">Téléphone du Résponsable</label>
+                  <input type="text" class="form-control" [(ngModel)]="boxUpadate.telephoneResponsable" required  name="telephoneResponsable">
+                </div>
+                <div class="form-group col-6">
+                  <label for="emailResponsable" style="color : rgb(255,255,255)">Email du Résponsable</label>
+                  <input #responsableEmailInput="ngModel" type="email" class="form-control" [(ngModel)]="boxUpadate.emailResponsable" required email name="emailResponsable">
+                  <div *ngIf="responsableEmailInput.invalid && responsableEmailInput.dirty"
+                class="alert alert-danger">
+                Veuillez saisir un email valide</div>
+              </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-6">
+                    <label for="contrat" style="color : rgb(255,255,255)">Contrat</label>
+                    <input type="text" class="form-control" [(ngModel)]="boxUpadate.contrat" required  name="contrat">
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="dateDebutContrat" style="color : rgb(255,255,255)">Date début du contrat</label>
+                    <input type="date" class="form-control" date='dd-MM-yyyy' [ngModel]="boxUpadate.dateDebutContrat | date:'yyyy-MM-dd'" required  name="dateDebutContrat">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-9 " style="display: inline-block;">
+                  <label for="contrat" style="color : rgb(255,255,255)">Status : </label>
+                  <div style="width:100px" class="flip-button col-6 form-control" (click)="clickButton($event)" [ngClass]="{'clicked': selected}">
+                    <div class="flip-button-inner">
+                      <div class="flip-button-front">Désactive</div>
+                      <div class="flip-button-back">Active</div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary mr-2"  (click)="modifierBox();closeDialogueModifier()"
+            [disabled]="!myFormUpdate.valid" style="background-color: #364490; border-color:#364490 ;">Modifier</button>
+          <button class="btn btn-dark" (click)="closeDialogueModifier()">Fermer </button>
+      </div> 
+    </div>
+  </div>
+
+</div>

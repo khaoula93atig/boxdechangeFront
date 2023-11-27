@@ -1,0 +1,163 @@
+
+
+<ul class="nav nav-tabs m-3">
+    <li class="nav-item">
+      <a class="nav-link active" (click)="role='box'" data-bs-toggle="tab" href="#box">Box</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="role='bank'"  data-bs-toggle="tab" href="#Bank">Bank</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="role='admin'" data-bs-toggle="tab" href="#Admin">Admin</a>
+    </li>
+  </ul>
+  
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane container text-white active" id="box">
+      
+      <div class="card ">
+        <div class="card-header">
+          <h2 class="text-white">Ajouter un utilisateur</h2>
+        </div>
+        <div class="card-body">
+      <form class="forms-sample" #myForm="ngForm">
+        <div class="row">
+        <div class="form-group col-6">
+          <label for="boxName" style="color : rgb(255,255,255)">Nom</label>
+          <input type="text" class="form-control" name="nom"  [(ngModel)]="user.nom" required>
+        </div>
+        <div class="form-group col-6">
+          <label for="boxName" style="color : rgb(255,255,255)">Prénom</label>
+          <input type="text" class="form-control" name="prenom"  [(ngModel)]="user.prenom" required>
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group col-6">
+          <label style="color : rgb(255,255,255)" for="Box">Téléphone</label>
+          <input type="text" #telephoneInput="ngModel" pattern="[- +()0-9]+" class="form-control" name="Telephone" [(ngModel)]="user.telephone" required>
+          <div *ngIf="telephoneInput.invalid && telephoneInput.dirty"
+          class="alert alert-danger">
+          Veuillez saisir un numéro de téléphone valide</div>
+        </div>
+        <div class="form-group col-6">
+          <label style="color : rgb(255,255,255)" for="Email">Email</label>
+          <input #emailInput="ngModel" type="email" class="form-control" name="Email" [(ngModel)]="user.email" email required>
+          <div *ngIf="emailInput.invalid && emailInput.dirty"
+          class="alert alert-danger">
+          Veuillez saisir un email valide</div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label style="color : rgb(255,255,255)" for="box">Box</label>
+            <select class="form-control" id="box" [(ngModel)]="boxId" name="box">
+              <option *ngFor="let box of boxs" [value]="box.idbox" >{{box.boxName}}</option>
+            </select>
+          </div>
+        </div>
+        
+      </form>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-info btn-lg mr-2" (click)="ajoutUser()"
+         [disabled]="!myForm.valid">Ajouter</button>
+    </div> 
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane container text-white " id="Bank">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-white">Ajouter un utilisateur</h2>
+        </div>
+        <div class="card-body">
+      <form class="forms-sample" #myForm2="ngForm">
+        <div class="row">
+        <div class="form-group col-6">
+          <label for="boxName" style="color : rgb(255,255,255)">Nom</label>
+          <input type="text" class="form-control" name="nom"  [(ngModel)]="user.nom" required>
+        </div>
+        <div class="form-group col-6">
+          <label for="boxName" style="color : rgb(255,255,255)">Prénom</label>
+          <input type="text" class="form-control" name="prenom"  [(ngModel)]="user.prenom" required>
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group col-6">
+          <label style="color : rgb(255,255,255)" for="Box">Téléphone</label>
+          <input type="text" #telephoneInput="ngModel" pattern="[- +()0-9]+" class="form-control" name="Telephone" [(ngModel)]="user.telephone" required>
+          <div *ngIf="telephoneInput.invalid && telephoneInput.dirty"
+          class="alert alert-danger">
+          Veuillez saisir un numéro de téléphone valide</div>
+        </div>
+        <div class="form-group col-6">
+          <label style="color : rgb(255,255,255)" for="Email">Email</label>
+          <input #emailInput="ngModel" type="email" class="form-control" name="Email" [(ngModel)]="user.email" email required>
+          <div *ngIf="emailInput.invalid && emailInput.dirty"
+          class="alert alert-danger">
+          Veuillez saisir un email valide</div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label style="color : rgb(255,255,255)" for="box">bank</label>
+            <select class="form-control" id="box" [(ngModel)]="bankId" name="bank">
+              <option *ngFor="let bank of banks" [value]="bank.idBank" >{{bank.idBank}}</option>
+            </select>
+          </div>
+
+
+        </div>
+        
+      </form>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-info btn-lg mr-2" (click)="ajoutUser()"
+         [disabled]="!myForm2.valid">Ajouter</button>
+    </div> 
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane container text-white " id="Admin">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-white">Ajouter un utilisateur</h2>
+        </div>
+        <div class="card-body">
+      <form class="forms-sample" #myForm3="ngForm">
+        <div class="row">
+        <div class="form-group col-6">
+          <label for="boxName" style="color : rgb(255,255,255)">Nom</label>
+          <input type="text" class="form-control" name="nom"  [(ngModel)]="user.nom" required>
+        </div>
+        <div class="form-group col-6">
+          <label for="boxName" style="color : rgb(255,255,255)">Prénom</label>
+          <input type="text" class="form-control" name="prenom"  [(ngModel)]="user.prenom" required>
+        </div>
+        </div>
+        <div class="row">
+        <div class="form-group col-6">
+          <label style="color : rgb(255,255,255)" for="Box">Téléphone</label>
+          <input type="text" #telephoneInput="ngModel" pattern="[- +()0-9]+" class="form-control" name="Telephone" [(ngModel)]="user.telephone" required>
+          <div *ngIf="telephoneInput.invalid && telephoneInput.dirty"
+          class="alert alert-danger">
+          Veuillez saisir un numéro de téléphone valide</div>
+        </div>
+        <div class="form-group col-6">
+          <label style="color : rgb(255,255,255)" for="Email">Email</label>
+          <input #emailInput="ngModel" type="email" class="form-control" name="Email" [(ngModel)]="user.email" email required>
+          <div *ngIf="emailInput.invalid && emailInput.dirty"
+          class="alert alert-danger">
+          Veuillez saisir un email valide</div>
+        </div>
+        </div>
+        
+        
+      </form>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-info btn-lg mr-2" (click)="ajoutUser()"
+         [disabled]="!myForm3.valid">Ajouter</button>
+    </div> 
+        </div>
+      </div>
+    </div>
+  </div>

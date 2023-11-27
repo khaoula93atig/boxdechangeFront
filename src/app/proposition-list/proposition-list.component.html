@@ -1,0 +1,154 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="title-icon" style=" display: flex;">
+        <mat-icon mat-list-icon class="sidebar-icon" style="color: #ffab00;
+      margin: 4px 17px; font-size: 30px;">list_alt</mat-icon>
+        <h4 class="card-title" style="font-size: 30px; margin-bottom: 35px;"> Mes Enchères</h4>
+      </div>
+
+      <div class="table-responsive table-enchere">
+        <table mat-table [dataSource]="dataSource" style="color: white; min-width: 100%;" class="table  table-dashboard"
+          style="background-color: #1a1c24;">
+
+          <!-- bank Column -->
+          <ng-container matColumnDef="Reference">
+            <th mat-header-cell *matHeaderCellDef class="pb-2"> Reférence </th>
+            <td mat-cell *matCellDef="let element"> {{element.referenceEnchere}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Devise">
+            <th mat-header-cell *matHeaderCellDef class="pb-2"> Devise </th>
+            <td mat-cell *matCellDef="let element"> {{element.devise}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Montant">
+            <th mat-header-cell *matHeaderCellDef class="pb-2"> Montant </th>
+            <td mat-cell *matCellDef="let element"> {{element.montantEnchere}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef class="pb-2"> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MM-yyyy' }} </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="pb-2"> </th>
+            <td mat-cell *matCellDef="let element" style="width: 100px;"> <button type="button" class="btn btn-primary"
+                (click)="openPopup();getPropositionsByEnchere(element.idEnchere)"
+                style="background-color: #364490; border-color: #364490; font-weight: 500;">
+                Liste des propositions</button> </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <!--<table class="table table-striped ">
+          <thead>
+            <tr>
+              <th> Reférence </th>
+              <th> Devise</th>
+              <th> Montant</th>
+              <th> Date de l'enchère</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Enchere of listenchere;let index=index">
+              <td>
+                {{Enchere.referenceEnchere }} </td>
+
+              <td>
+                <div style="display: inline-flex;  font-weight: 700;">
+                  <div>{{Enchere.devise }}</div>
+
+                </div>
+              </td>
+
+
+
+
+              <td>
+                <div style="display: inline-flex;">
+                  <div>{{Enchere.montantEnchere }}</div>
+
+                </div>
+              </td>
+
+
+              <td>
+                <div style="display: inline-flex;">
+                  <div>{{Enchere.date | date:'dd-MM-yyyy' }}</div>
+
+                </div>
+              </td>
+              <td>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <button type="button" class="btn btn-primary" (click)="openPopup();getbyindex(index)"
+                      style="background-color: #364490; border-color: #364490; font-weight: 500;">
+                      Liste des propositions</button>
+                  </div>
+
+
+                </div>
+              </td>
+            </tr>
+
+
+
+
+
+          </tbody>
+        </table>-->
+        <mat-paginator style="color: #e6eaff;" [pageSizeOptions]="[10, 20, 40, 100]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Popup  == liste des propositions-->
+<div class="modal model-bank" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-white">Liste des propositions</h4>
+      </div>
+
+      <div class="modal-body">
+
+
+        <div class="table-responsive table-enchere">
+
+          <table class="table  table-dashboard table-striped text-white" matSort>
+            <thead>
+              <tr>
+                <th mat-sort-header="banque">Banque</th>
+                <th mat-sort-header="taux">Taux</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let proposition of propositionsForSelectedEnchere | sort: 'taux_soumission'; let index = index">
+                <td class="text-white"
+                  style="color: #727898; text-transform: uppercase; font-weight: 600; font-size: 13px;">
+                  {{ proposition.user.bank.bankName }}
+                </td>
+                <td class="text-white" style="font-weight: 700;">
+                  {{ proposition.taux_soumission }}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

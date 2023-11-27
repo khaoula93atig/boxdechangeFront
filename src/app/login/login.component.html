@@ -1,0 +1,107 @@
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="row w-100 m-0">
+        <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+          <div class="card col-lg-4 mx-auto">
+            <div class="card-body px-5 py-5">
+              <h3 class="card-title text-center mb-3">Connexion</h3>
+              <form *ngIf="!isLoggedIn"
+              name="form"
+              (ngSubmit)="f.form.valid && onSubmit()"
+              #f="ngForm"
+              novalidate>
+                <div class="form-group">
+                  <label>Username *</label>
+                  <input type="text" class="form-control p_input" name="username" minlength="3"
+                  [(ngModel)]="form.username"
+                  required
+                  #username="ngModel">
+                  <div *ngIf="username.invalid && username.dirty"
+          class="alert alert-danger">
+          Veuillez saisir votre username correctement</div>
+                </div>
+                <div class="form-group">
+                  <label>Mot de passe *</label>
+                  <div class="form-group inner-addon right-addon">
+                    <div class="input-group-prepend">
+                  <input [type]="showPassword ? 'text' : 'password'" class="form-control p_input" 
+                  name="password"
+                  [(ngModel)]="form.password"
+                  required
+                  minlength="6"
+                  #password="ngModel">
+                  <div>
+                    <mat-icon class="fa text-white material-symbols-outlined" style="width: 10px; height: 10px;" [class.hide]="showPassword"
+                    (click)="showPassword = !showPassword">
+                      visibility</mat-icon>
+                      <mat-icon class="fa text-white material-symbols-outlined" [class.hide]="!showPassword"
+                      (click)="showPassword = !showPassword">
+                        visibility_off</mat-icon>
+                  </div>
+                    </div>
+                  <div *ngIf="password.invalid && password.dirty"
+          class="alert alert-danger">
+          Veuillez saisir votre mot de passe</div>
+                  </div>
+                </div>
+                <div class="form-group d-flex align-items-center justify-content-between">
+                  <!--<div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input"> Remember me </label>
+                  </div>-->
+                  <a class="forgot-pass" style="color: #6d728b;" (click)="openPopup()">Mot de passe oublié</a>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-block enter-btn"
+                  style="background-color: #364490; border-color:#364490 ;" [disabled]="!f.form.valid"
+                  >Login</button>
+                </div>
+                
+
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+      </div>
+      <!-- row ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+  <div class="modal model-bank" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-white">Mot de passe oublié</h4>
+        </div>
+  
+        <div class="modal-body">
+          <form [formGroup]="mdpForm">
+            <div class=" form-group mb-3">
+              <label>Email</label>
+              <input type="text" class="form-control" formControlName="login" [ngClass]="{
+                      'is-valid': mdpForm.get('login').valid,
+                      'is-invalid': mdpForm.get('login').invalid  && (mdpForm.get('login').touched || mdpForm.get('login').dirty)}">
+        
+              <div *ngIf="mdpForm.get('login').invalid && (mdpForm.get('login').touched || mdpForm.get('login').dirty)"
+                   Class="invalid-feedback">
+                <div *ngIf="mdpForm.get('login').getError('required')">champs obligatoire!</div>
+              </div>
+            </div>
+          </form>
+        
+  
+  
+        </div>
+  
+  
+        <div class="modal-footer">
+          <button class=" btn btn-info" type="submit" style="background-color: #364490; border-color:#364490 ;"  (click)="envoyermail()">Envoyer mail</button>
+          <button type="button" class="btn btn-danger" (click)="closePopup()">
+            Fermer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

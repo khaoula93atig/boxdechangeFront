@@ -1,0 +1,686 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #191c24;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #000000;
+}
+
+.stretch-card {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -webkit-justify-content: stretch;
+  justify-content: stretch;
+}
+
+.stretch-card>.card {
+  width: 100%;
+  min-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: inherit;
+  text-align: -webkit-match-parent;
+}
+
+.table,
+.jsgrid .jsgrid-table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.table th,
+.jsgrid .jsgrid-table th,
+.table td,
+.jsgrid .jsgrid-table td {
+  padding: 0.9375rem;
+  vertical-align: center;
+  border-top: 1px solid #2c2e33;
+}
+
+.table thead th,
+.jsgrid .jsgrid-table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #2c2e33;
+}
+
+.table tbody+tbody,
+.jsgrid .jsgrid-table tbody+tbody {
+  border-top: 2px solid #2c2e33;
+}
+
+.table-sm th,
+.table-sm td {
+  padding: 0.3rem;
+}
+
+.table-bordered {
+  border: 1px solid #2c2e33;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #2c2e33;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+}
+
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody+tbody {
+  border: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #000000;
+}
+
+.table-hover tbody tr:hover {
+  color: #212529;
+  background-color: #000000;
+}
+
+.table-primary,
+.table-primary>th,
+.table-primary>td {
+  background-color: #0084d5;
+}
+
+.table-primary th,
+.table-primary td,
+.table-primary thead th,
+.table-primary tbody+tbody {
+  border-color: #7ac5f3;
+}
+
+.table-hover .table-primary:hover {
+  background-color: #0074bc;
+}
+
+.table-hover .table-primary:hover>td,
+.table-hover .table-primary:hover>th {
+  background-color: #0074bc;
+}
+
+.table-secondary,
+.table-secondary>th,
+.table-secondary>td {
+  background-color: #d2d7d9;
+}
+
+.table-secondary th,
+.table-secondary td,
+.table-secondary thead th,
+.table-secondary tbody+tbody {
+  border-color: #f1f4f5;
+}
+
+.table-hover .table-secondary:hover {
+  background-color: #c4cbcd;
+}
+
+.table-hover .table-secondary:hover>td,
+.table-hover .table-secondary:hover>th {
+  background-color: #c4cbcd;
+}
+
+.table-success,
+.table-success>th,
+.table-success>td {
+  background-color: #00c154;
+}
+
+.table-success th,
+.table-success td,
+.table-success thead th,
+.table-success tbody+tbody {
+  border-color: #7ae8aa;
+}
+
+.table-hover .table-success:hover {
+  background-color: #00a849;
+}
+
+.table-hover .table-success:hover>td,
+.table-hover .table-success:hover>th {
+  background-color: #00a849;
+}
+
+.table-info,
+.table-info>th,
+.table-info>td {
+  background-color: #8457d5;
+}
+
+.table-info th,
+.table-info td,
+.table-info thead th,
+.table-info tbody+tbody {
+  border-color: #c5acf3;
+}
+
+.table-hover .table-info:hover {
+  background-color: #7543d0;
+}
+
+.table-hover .table-info:hover>td,
+.table-hover .table-info:hover>th {
+  background-color: #7543d0;
+}
+
+.table-warning,
+.table-warning>th,
+.table-warning>td {
+  background-color: #eb9d00;
+}
+
+.table-warning th,
+.table-warning td,
+.table-warning thead th,
+.table-warning tbody+tbody {
+  border-color: #ffd37a;
+}
+
+.table-hover .table-warning:hover {
+  background-color: #d28c00;
+}
+
+.table-hover .table-warning:hover>td,
+.table-hover .table-warning:hover>th {
+  background-color: #d28c00;
+}
+
+.table-danger,
+.table-danger>th,
+.table-danger>td {
+  background-color: #e83d44;
+}
+
+.table-danger th,
+.table-danger td,
+.table-danger thead th,
+.table-danger tbody+tbody {
+  border-color: #fd9da1;
+}
+
+.table-hover .table-danger:hover {
+  background-color: #e5262e;
+}
+
+.table-hover .table-danger:hover>td,
+.table-hover .table-danger:hover>th {
+  background-color: #e5262e;
+}
+
+.table-light,
+.table-light>th,
+.table-light>td {
+  background-color: #ebebeb;
+}
+
+.table-light th,
+.table-light td,
+.table-light thead th,
+.table-light tbody+tbody {
+  border-color: white;
+}
+
+.table-hover .table-light:hover {
+  background-color: #dedede;
+}
+
+.table-hover .table-light:hover>td,
+.table-hover .table-light:hover>th {
+  background-color: #dedede;
+}
+
+.table-dark,
+.table-dark>th,
+.table-dark>td {
+  background-color: #0c0c0c;
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th,
+.table-dark tbody+tbody {
+  border-color: #818181;
+}
+
+.table-hover .table-dark:hover {
+  background-color: black;
+}
+
+.table-hover .table-dark:hover>td,
+.table-hover .table-dark:hover>th {
+  background-color: black;
+}
+
+.table-active,
+.table-active>th,
+.table-active>td {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-hover .table-active:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-hover .table-active:hover>td,
+.table-hover .table-active:hover>th {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table .thead-dark th,
+.jsgrid .jsgrid-table .thead-dark th {
+  color: #fff;
+  background-color: #212529;
+  border-color: #454d55;
+}
+
+.table .thead-light th,
+.jsgrid .jsgrid-table .thead-light th {
+  color: #495057;
+  background-color: #e9ecef;
+  border-color: #2c2e33;
+}
+
+.table-dark {
+  color: #fff;
+  background-color: #212529;
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th {
+  border-color: #454d55;
+}
+
+.table-dark.table-bordered {
+  border: 0;
+}
+
+.table-dark.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.table-dark.table-hover tbody tr:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
+@media (max-width: 575.98px) {
+  .table-responsive-sm {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive-sm>.table-bordered {
+    border: 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .table-responsive-md {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive-md>.table-bordered {
+    border: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .table-responsive-lg {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive-lg>.table-bordered {
+    border: 0;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .table-responsive-xl {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-responsive-xl>.table-bordered {
+    border: 0;
+  }
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive>.table-bordered {
+  border: 0;
+}
+
+.form-control,
+.asColorPicker-input,
+.dataTables_wrapper select,
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row select,
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type=number],
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--single .select2-search__field,
+.typeahead,
+.tt-query,
+.tt-hint {
+  display: block;
+  width: 100%;
+  height: 2.875rem;
+  padding: 0.56rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #495057;
+  background-color: #2A3038;
+  background-clip: padding-box;
+  border: 1px solid #2c2e33;
+  border-radius: 2px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .form-control,
+  .asColorPicker-input,
+  .dataTables_wrapper select,
+  .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
+  .jsgrid .jsgrid-table .jsgrid-filter-row select,
+  .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number],
+  .select2-container--default .select2-selection--single,
+  .select2-container--default .select2-selection--single .select2-search__field,
+  .typeahead,
+  .tt-query,
+  .tt-hint {
+    transition: none;
+  }
+}
+
+.form-control::-ms-expand,
+.asColorPicker-input::-ms-expand,
+.dataTables_wrapper select::-ms-expand,
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type=text]::-ms-expand,
+.jsgrid .jsgrid-table .jsgrid-filter-row select::-ms-expand,
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type=number]::-ms-expand,
+.select2-container--default .select2-selection--single::-ms-expand,
+.select2-container--default .select2-selection--single .select2-search__field::-ms-expand,
+.typeahead::-ms-expand,
+.tt-query::-ms-expand,
+.tt-hint::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.form-control:-moz-focusring,
+.asColorPicker-input:-moz-focusring,
+.dataTables_wrapper select:-moz-focusring,
+.jsgrid .jsgrid-table .jsgrid-filter-row input:-moz-focusring[type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row select:-moz-focusring,
+.jsgrid .jsgrid-table .jsgrid-filter-row input:-moz-focusring[type=number],
+.select2-container--default .select2-selection--single:-moz-focusring,
+.select2-container--default .select2-selection--single .select2-search__field:-moz-focusring,
+.typeahead:-moz-focusring,
+.tt-query:-moz-focusring,
+.tt-hint:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #495057;
+}
+
+.form-control:focus,
+.asColorPicker-input:focus,
+.dataTables_wrapper select:focus,
+.jsgrid .jsgrid-table .jsgrid-filter-row input:focus[type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row select:focus,
+.jsgrid .jsgrid-table .jsgrid-filter-row input:focus[type=number],
+.select2-container--default .select2-selection--single:focus,
+.select2-container--default .select2-selection--single .select2-search__field:focus,
+.typeahead:focus,
+.tt-query:focus,
+.tt-hint:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control::placeholder,
+.asColorPicker-input::placeholder,
+.dataTables_wrapper select::placeholder,
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type=text]::placeholder,
+.jsgrid .jsgrid-table .jsgrid-filter-row select::placeholder,
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type=number]::placeholder,
+.select2-container--default .select2-selection--single::placeholder,
+.select2-container--default .select2-selection--single .select2-search__field::placeholder,
+.typeahead::placeholder,
+.tt-query::placeholder,
+.tt-hint::placeholder {
+  color: #4b5564;
+  opacity: 1;
+}
+
+.form-control:disabled,
+.asColorPicker-input:disabled,
+.dataTables_wrapper select:disabled,
+.jsgrid .jsgrid-table .jsgrid-filter-row input:disabled[type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row select:disabled,
+.jsgrid .jsgrid-table .jsgrid-filter-row input:disabled[type=number],
+.select2-container--default .select2-selection--single:disabled,
+.select2-container--default .select2-selection--single .select2-search__field:disabled,
+.typeahead:disabled,
+.tt-query:disabled,
+.tt-hint:disabled,
+.form-control[readonly],
+.asColorPicker-input[readonly],
+.dataTables_wrapper select[readonly],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[readonly][type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row select[readonly],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[readonly][type=number],
+.select2-container--default .select2-selection--single[readonly],
+.select2-container--default .select2-selection--single .select2-search__field[readonly],
+.typeahead[readonly],
+.tt-query[readonly],
+.tt-hint[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+input[type="date"].form-control,
+input.asColorPicker-input[type="date"],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type="date"][type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type="date"][type=number],
+.select2-container--default input.select2-selection--single[type="date"],
+.select2-container--default .select2-selection--single input.select2-search__field[type="date"],
+input.typeahead[type="date"],
+input.tt-query[type="date"],
+input.tt-hint[type="date"],
+input[type="time"].form-control,
+input.asColorPicker-input[type="time"],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type="time"][type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type="time"][type=number],
+.select2-container--default input.select2-selection--single[type="time"],
+.select2-container--default .select2-selection--single input.select2-search__field[type="time"],
+input.typeahead[type="time"],
+input.tt-query[type="time"],
+input.tt-hint[type="time"],
+input[type="datetime-local"].form-control,
+input.asColorPicker-input[type="datetime-local"],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type="datetime-local"][type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type="datetime-local"][type=number],
+.select2-container--default input.select2-selection--single[type="datetime-local"],
+.select2-container--default .select2-selection--single input.select2-search__field[type="datetime-local"],
+input.typeahead[type="datetime-local"],
+input.tt-query[type="datetime-local"],
+input.tt-hint[type="datetime-local"],
+input[type="month"].form-control,
+input.asColorPicker-input[type="month"],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type="month"][type=text],
+.jsgrid .jsgrid-table .jsgrid-filter-row input[type="month"][type=number],
+.select2-container--default input.select2-selection--single[type="month"],
+.select2-container--default .select2-selection--single input.select2-search__field[type="month"],
+input.typeahead[type="month"],
+input.tt-query[type="month"],
+input.tt-hint[type="month"] {
+  appearance: none;
+}
+
+select.form-control:focus::-ms-value,
+select.asColorPicker-input:focus::-ms-value,
+.dataTables_wrapper select:focus::-ms-value,
+.jsgrid .jsgrid-table .jsgrid-filter-row select:focus::-ms-value,
+.select2-container--default select.select2-selection--single:focus::-ms-value,
+.select2-container--default .select2-selection--single select.select2-search__field:focus::-ms-value,
+select.typeahead:focus::-ms-value,
+select.tt-query:focus::-ms-value,
+select.tt-hint:focus::-ms-value {
+  color: #495057;
+  background-color: #2A3038;
+}
+
+.form-control-file,
+.form-control-range {
+  display: block;
+  width: 100%;
+}
+
+.col-form-label {
+  padding-top: calc(0.56rem + 1px);
+  padding-bottom: calc(0.56rem + 1px);
+  margin-bottom: 0;
+  font-size: inherit;
+  line-height: 1;
+}
+
+.col-form-label-lg {
+  padding-top: calc(0.94rem + 1px);
+  padding-bottom: calc(0.94rem + 1px);
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.col-form-label-sm {
+  padding-top: calc(0.5rem + 1px);
+  padding-bottom: calc(0.5rem + 1px);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.form-control-plaintext {
+  display: block;
+  width: 100%;
+  padding: 0.56rem 0;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  line-height: 1;
+  color: #212529;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: 1px 0;
+}
+
+.form-control-plaintext.form-control-sm,
+.form-control-plaintext.form-control-lg {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.form-control-sm {
+  height: 2.575rem;
+  padding: 0.5rem 0.81rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.form-control-lg {
+  height: 3.175rem;
+  padding: 0.94rem 1.94rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+select.form-control[size],
+select.asColorPicker-input[size],
+.dataTables_wrapper select[size],
+.jsgrid .jsgrid-table .jsgrid-filter-row select[size],
+.select2-container--default select.select2-selection--single[size],
+.select2-container--default .select2-selection--single select.select2-search__field[size],
+select.typeahead[size],
+select.tt-query[size],
+select.tt-hint[size],
+select.form-control[multiple],
+select.asColorPicker-input[multiple],
+.dataTables_wrapper select[multiple],
+.jsgrid .jsgrid-table .jsgrid-filter-row select[multiple],
+.select2-container--default select.select2-selection--single[multiple],
+.select2-container--default .select2-selection--single select.select2-search__field[multiple],
+select.typeahead[multiple],
+select.tt-query[multiple],
+select.tt-hint[multiple] {
+  height: auto;
+}
+
+.table-enchere thead th {
+  border-bottom: 1px solid #333747 !important;
+}
+
+.color-loading{
+  color: #00c154;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  animation: rotating 4s linear infinite;
+  color: #FF9800;
+  margin-right: 5px;
+}
+.text-load {
+  color: #FF9800 !important;
+  font-weight: 550;
+}

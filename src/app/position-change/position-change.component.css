@@ -1,0 +1,88 @@
+/**===== Custom style ======**/
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  table {
+    width: 100%;
+    margin-bottom: 50px;
+    background-color: #191C24;
+  }
+  .table td{
+    padding-left: 0px;
+    padding-right: 0px;
+    border: none
+  
+  }
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #152B39;
+    font-family: Courier, monospace;
+    font-size: 14px;
+    color:#ccc; 
+  }
+  
+  .wrapper {
+    display: block;
+    margin: 5em auto;
+    border: 1px solid #555;
+    width: 700px;
+    height: 350px;
+    position: relative;
+  }
+  p{text-align:center;}
+  .label {
+    height: 1em;
+    padding: .3em;
+    background: rgba(255, 255, 255, .8);
+    position: absolute;
+    display: none;
+    color:#333;
+    
+  }
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .table th{
+    padding-left: 0px;
+    /*padding-right: 0px;*/
+    /*width: 100px*/
+  }
+  
+  .col-md-12{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .color-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  input{
+    background: #262935;
+    border: 1px solid #3f4254 !important;
+    height: 43px;
+    border-radius: 3px;
+    color: #FFf;
+    width: 85%;
+}
+
+.table th{
+  padding: 1rem 0.5rem;
+}
+.table thead th, .jsgrid .jsgrid-table thead th {
+  color: #DF9F3E;
+}
+.alert-dark{
+  color: #ffffff;
+  background-color: #0989e170;
+  border: 0px;
+}
+.alert-dark .alert-link {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+
+ 

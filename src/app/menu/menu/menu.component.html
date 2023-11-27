@@ -1,0 +1,212 @@
+<mat-toolbar class="example-toolbar">
+  <h1 class="example-app-name text-white">Box Change</h1>
+  <button class="btn btn-dark" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon></button>
+  <span class="example-spacer"></span>
+  <ul class="nav">
+    <li class="nav-item nav-notif">
+      <div class="dropdown nav-link">
+        <a (click)="readNotification()" class="text-white count-indicator" id="notificationDropdown"
+          data-toggle="dropdown">
+
+          <mat-icon>notifications</mat-icon>
+          <span *ngIf="nbr!=0" class="badge badge-danger badge-counter count bg-danger">{{nbr}}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+          aria-labelledby="notificationDropdown">
+          <h6 class=" mb-0"> Notifications</h6>
+          <div class="dropdown-divider"></div>
+          <!-- new notification des encheres -->
+          <a *ngIf="notification.type == 'enchere' && notification!= null" class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-gavel text-success"></i>
+              </div>
+            </div>
+            <div class="preview-item-content">
+              <p class="preview-subject text-muted ellipsis mb-1">Nouvelle enchère</p>
+              <p class="preview-subject mb-1">{{notification.sender}} || {{notification.content}}</p>
+              <small style="font-weight: 600; font-size: 11px;"
+                class="text-muted ellipsis mb-0">{{notification.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
+            </div>
+          </a>
+          <!--new proposition -->
+
+          <a *ngIf="notification.type == 'proposition' && notification!= null " class="dropdown-item preview-item">
+            <div class="preview-thumbnail">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-reply text-success"></i>
+              </div>
+            </div>
+            <div class="preview-item-content">
+              <p class="preview-subject text-muted ellipsis mb-1">Nouvelle proposition</p>
+              <p class="preview-subject mb-1">{{notification.sender}} || {{notification.content}}</p>
+              <small style="font-weight: 600; font-size: 11px;"
+                class="text-muted ellipsis mb-0">{{notification.timestamp| date:'dd-MM-yyyy HH:mm'}}</small>
+            </div>
+          </a>
+          <!--<div class="dropdown-divider"></div>-->
+          <a class="dropdown-item preview-item" *ngFor="let notif of notifications">
+
+            <!-- notification des encheres -->
+
+            <div class="preview-thumbnail" *ngIf="notif.type == 'enchere'">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-gavel text-success"></i>
+              </div>
+            </div>
+            <div class="preview-item-content" *ngIf="notif.type == 'enchere'">
+              <p class="preview-subject text-muted ellipsis mb-1">Nouvelle enchère</p>
+              <p class="preview-subject mb-1">{{notif.sender}} || {{notif.content}}</p>
+              <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0">{{notif.timestamp|
+                date:'dd-MM-yyyy HH:mm'}}</small>
+              <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0"
+                *ngIf="notif.timestamp == now"> aujourd'huit{{notif.timestamp| date:'HH:mm'}}</small>
+            </div>
+            <div class="dropdown-divider"></div>
+
+            <!--notification des propositions -->
+
+            <div class="preview-thumbnail" *ngIf="notif.type == 'proposition' ">
+              <div class="preview-icon bg-dark rounded-circle">
+                <i class="mdi mdi-reply text-success"></i>
+              </div>
+            </div>
+            <div class="preview-item-content" *ngIf="notif.type == 'proposition' ">
+              <p class="preview-subject text-muted ellipsis mb-1">Proposition de la Bank </p>
+              <p class="preview-subject mb-1">{{notif.sender}} || {{notif.content}}</p>
+              <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0">{{notif.timestamp|
+                date:'dd-MM-yyyy HH:mm'}}</small>
+              <small style="font-weight: 600; font-size: 11px;" class="text-muted ellipsis mb-0"
+                *ngIf="notif.timestamp == now"> aujourd'huit{{notif.timestamp| date:'HH:mm'}}</small>
+            </div>
+            <div class="dropdown-divider"></div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item">
+      <div class="btn-group nav-link">
+        <a type="button" class="text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{userName}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <button class="dropdown-item" type="button" style="display: flex;" (click)="logoutAndQuit()"><mat-icon style="    margin-right: 6px;
+            margin-top: 4px;">logout</mat-icon>
+            <h4 style="font-size: 14px;">Déconnexion</h4>
+          </button>
+        </div>
+      </div>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </li>-->
+  </ul>
+
+</mat-toolbar>
+<mat-sidenav-container class="example-container" autosize>
+  <mat-sidenav #sidenav="matSidenav" class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+    (mouseleave)="mouseleave()">
+    <mat-nav-list>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/box']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ADMIN'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Box</span>
+        <mat-icon mat-list-icon class="sidebar-icon text-success">
+          currency_exchange</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/bank']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ADMIN'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Bank</span>
+        <mat-icon mat-list-icon class="sidebar-icon text-warning">account_balance</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/users']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ADMIN'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Users</span>
+        <mat-icon mat-list-icon class="sidebar-icon text-info">group</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item active" [routerLink]="['/dash/ajoutUser']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ADMIN'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Ajout user</span>
+        <mat-icon mat-list-icon class="sidebar-icon text-danger">
+          person_add</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item active" (click)="onSidenavClose()" [routerLink]="['/dash/dashboard']"
+        routerLinkActive #routerLinkActiveInstance="routerLinkActive"
+        [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Dashboard de vente</span>
+        <mat-icon mat-list-icon class="sidebar-icon" style="color: #00BCD4;">dashboard</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item active" (click)="onSidenavClose()" [routerLink]="['/dash/dashboard-achat']"
+        routerLinkActive #routerLinkActiveInstance="routerLinkActive"
+        [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Dashboard d'achat</span>
+        <mat-icon mat-list-icon class="sidebar-icon" style="color: #8f5fe8;">dashboard</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/list']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_BANK'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Les enchères</span>
+        <mat-icon mat-list-icon class="sidebar-icon " style="color: #ffab00;">list_alt</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/propositionList']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Mes enchères</span>
+        <mat-icon mat-list-icon class="sidebar-icon" style="color: #ffab00;">list_alt</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/ajoutEnchere']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Lancer une enchère</span>
+        <mat-icon mat-list-icon class="sidebar-icon" style="color: #f53f44;">library_add</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/positionChange']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Position de change</span>
+        <mat-icon mat-list-icon class="sidebar-icon" style="color: #0a89e1;">
+          currency_exchange</mat-icon>
+      </mat-list-item>
+      <mat-list-item class="parent text-item" [routerLink]="['/dash/convertisseur']" routerLinkActive
+        #routerLinkActiveInstance="routerLinkActive" [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive" *ngIf="role=='ROLE_ENCHERE'">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Convertisseur</span>
+        <mat-icon mat-list-icon class="sidebar-icon" style="color: #cddc39;">
+          calculate</mat-icon>
+      </mat-list-item>
+      <!--<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent text-white">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Parent Menu</span>
+				<mat-icon mat-list-icon>home</mat-icon>
+				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+			</mat-list-item>
+			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+				<a class="text-white" mat-list-item href="...">Submenu Item 1</a>
+				<a class="text-white" mat-list-item href="...">Submenu Item 2</a>
+				<mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+					<span class="full-width" *ngIf="isExpanded || isShowing">Nested Menu</span>
+					<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+				</mat-list-item>
+				<div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
+					<mat-list-item>SubSubmenu Item 1</mat-list-item>
+					<mat-list-item>SubSubmenu Item 2</mat-list-item>
+				</div>
+			</div>-->
+    </mat-nav-list>
+    <mat-nav-list>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <router-outlet class="p-2"></router-outlet>
+
+</mat-sidenav-container>

@@ -1,0 +1,71 @@
+<div class="card m-2">
+  <div class="card-body">
+    <div class="title-icon" style=" display: flex;">
+
+      <mat-icon mat-list-icon class="sidebar-icon" style="color: #0a89e1;  margin: 0px 18px 0px 5px;
+          font-size: 30px;">
+        currency_exchange</mat-icon>
+      <h4 class="card-title" style="font-size: 30px;
+          margin-bottom: 35px;">Gestion de la position de change</h4>
+    </div>
+
+  </div>
+  <div class="table-responsive-xl table-change">
+    <table class="table table-dashboard">
+      <thead>
+        <tr>
+          <th scope="col">   </th>
+          <th scope="col" style="padding-left: 0px;">EUR</th>
+          <th scope="col" style="padding-left: 0px;">USD</th>
+          <th scope="col" style="padding-left: 0px;">GBP</th>
+          <th scope="col" style="padding-left: 0px;">JPY</th>
+          <th scope="col" style="padding-left: 0px;">SAR</th>
+          <th scope="col" style="padding-left: 0px;">AED</th>
+          <th scope="col" style="padding-left: 0px;">CAD</th>
+          <!--<th scope="col">Last</th>
+        <th scope="col">Handle</th>-->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let v of ventes">
+          <th scope="row" style="color: #fff; padding-left: 20px;">Vente</th>
+          <td>{{v.deviseeur| number:'1.3-3'}}</td>
+          <td>{{v.deviseusd| number:'1.3-3'}}</td>
+          <td>{{v.devisegbp| number:'1.3-3'}}</td>
+          <td>{{v.devisejpy| number:'1.3-3'}}</td>
+          <td>{{v.devisesar| number:'1.3-3'}}</td>
+          <td>{{v.deviseaed| number:'1.3-3'}}</td>
+          <td>{{v.devisecad| number:'1.3-3'}}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="color: #fff; padding-left: 20px;">Mes devises</th>
+          <td><input type="text" [(ngModel)]="inputEur" (input)="TransferEurToTnd()"></td>
+          <td><input type="text" [(ngModel)]="inputUsd" (keyup)="TransferUsdToTnd()"></td>
+          <td><input type="text" [(ngModel)]="inputGbp" (keyup)="TransferGbpToTnd()"></td>
+          <td><input type="text" [(ngModel)]="inputJpy" (keyup)="TransferJpyToTnd()"></td>
+          <td><input type="text" [(ngModel)]="inputSar" (keyup)="TransferSarToTnd()"></td>
+          <td><input type="text" [(ngModel)]="inputAed" (keyup)="TransferAedToTnd()"></td>
+          <td><input type="text" [(ngModel)]="inputCad" (keyup)="TransferCadToTnd()"></td>
+        </tr>
+        <tr>
+          <th scope="row" style="color: #fff; padding-left: 20px;">TND</th>
+          <td>{{eurToTnd|currency:' ':'symbol'}}</td>
+          <td>{{usdToTnd|currency:' ':'symbol'}}</td>
+          <td>{{gbpToTnd|currency:' ':'symbol'}}</td>
+          <td>{{jpyToTnd|currency:' ':'symbol'}}</td>
+          <td>{{sarToTnd|currency:' ':'symbol'}}</td>
+          <td>{{aedToTnd|currency:' ':'symbol'}}</td>
+          <td>{{cadToTnd|currency:' ':'symbol'}}</td>
+        </tr>
+        <tr>
+          <th scope="row" style="color: #fff; padding-left: 20px;">Totale en TND</th>
+          <td colspan="7">{{totalDevise|currency:' ':'symbol'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-dark m-3" role="alert">
+    Pour avoir un équilibre il faut avoir : <a class="alert-link">{{percentEur|currency:'EUR':'symbol'}}</a> et <a
+      class="alert-link">{{percentUsd |currency:'USD':'symbol'}}</a>
+  </div>
+</div>

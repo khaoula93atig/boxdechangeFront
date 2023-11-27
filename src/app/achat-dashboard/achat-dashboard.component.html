@@ -1,0 +1,369 @@
+<!-- ===== Boxes  Card =====-->
+<div class="row m-2">
+ 
+
+    <div class="col-xl-3 col-lg-6">
+      <div class="card card-stats mb-4 mb-xl-0">
+        <div class="card-body">
+          <div class="col-sm-12 row" style="margin-right: 0px;  padding: 0; margin-left: 0px;     margin-bottom: 0px;">
+            <div class="col-sm-6" style="padding-left: 0px;">
+              <p class="mt-3 mb-0 text-muted text-sm text-card" >
+  
+                <span class="value-card price">
+                  <span class="long-value"> {{symbol}} </span>
+                  {{maxValeurAchatJour | number:'1.3'}}</span>
+              </p>
+                <p><span class="text-nowrap text-nowrap-up"> Le plus haut <span class="mdi mdi-arrow-top-right icon-item"></span></span>
+                </p>
+           
+            </div>
+            <div class="col-sm-6"   style="padding-right: 0px;">
+              <p class="mt-3 mb-0 text-muted text-sm text-card" >
+  
+                <span class="value-card price">
+                  <span class="long-value"> {{symbol}} </span> 
+                  {{minValeurAchatJour | number: '1.3'}} </span>
+              </p>
+                <p><span class="text-nowrap text-nowrap-down"> Le plus bas <span class="mdi mdi-arrow-bottom-right icon-item"></span></span>
+  
+              </p>
+            </div>
+  
+          </div>
+  
+  
+          <h5 class="card-title text-uppercase text-muted mb-0" style="font-size: 16px; font-weight: 700; margin-left: 0px; text-align: center;">
+            Ce jour
+          </h5>
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-xl-3 col-lg-6">
+      <div class="card card-stats mb-4 mb-xl-0">
+        <div class="card-body">
+          <div class="col-sm-12 row" style="margin-right: 0px;  padding: 0; margin-left: 0px;     margin-bottom: 0px;">
+            <div class="col-sm-6" style="padding-left: 0px;">
+              <p class="mt-3 mb-0 text-muted text-sm text-card" data-toggle="tooltip" data-placement="top" [title]="'Date du valeur : ' + (maxValeurAchatSemaine.date | date: 'dd-MM-yyyy')" >
+  
+                <span class="value-card price">
+                  <span class="long-value"> {{symbol}} </span>
+                  {{maxValeurAchatSemaine.valeur | number: '1.3'}}  </span>
+              </p>
+                <p><span class="text-nowrap text-nowrap-up"> Le plus haut <span class="mdi mdi-arrow-top-right icon-item"></span></span>
+                </p>
+           
+            </div>
+            <div class="col-sm-6"   style="padding-right: 0px;">
+              <p class="mt-3 mb-0 text-muted text-sm text-card" data-toggle="tooltip" data-placement="top" [title]="'Date du valeur : ' + (minValeurAchatSemaine.date | date: 'dd-MM-yyyy')">
+  
+                <span class="value-card price">
+                  <span class="long-value"> {{symbol}} </span>
+                  {{minValeurAchatSemaine.valeur | number : '1.3'}} </span>
+              </p>
+                <p><span class="text-nowrap text-nowrap-down"> Le plus bas <span class="mdi mdi-arrow-bottom-right icon-item"></span></span>
+  
+              </p>
+            </div>
+  
+          </div>
+  
+  
+          <h5 class="card-title text-uppercase text-muted mb-0" style="font-size: 16px; font-weight: 700; margin-left: 0px; text-align: center;">
+            Cette semaine
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <div class="card card-stats mb-4 mb-xl-0">
+        <div class="card-body">
+          <div class="col-sm-12 row" style="margin-right: 0px;  padding: 0; margin-left: 0px;     margin-bottom: 0px;">
+            <div class="col-sm-6" style="padding-left: 0px;">
+              <p class="mt-3 mb-0 text-muted text-sm text-card"  data-toggle="tooltip" data-placement="top" [title]="'Date du valeur : ' + (maxValeurAchatMois.date | date: 'dd-MM-yyyy')">
+  
+                <span class="value-card price">
+                  <span class="long-value"> {{symbol}} </span>
+                  {{maxValeurAchatMois.valeur | number: '1.3'}} </span>
+              </p>
+                <p><span class="text-nowrap text-nowrap-up"> Le plus haut <span class="mdi mdi-arrow-top-right icon-item"></span></span>
+                </p>
+           
+            </div>
+            <div class="col-sm-6"   style="padding-right: 0px;">
+              <p class="mt-3 mb-0 text-muted text-sm text-card" data-toggle="tooltip" data-placement="top" [title]="'Date du valeur : ' + (minValeurAchatMois.date | date: 'dd-MM-yyyy')">
+  
+                <span class="value-card price">
+                  <span class="long-value"> {{symbol}} </span>
+                   {{minValeurAchatMois.valeur | number:'1.3'}} </span>
+              </p>
+                <p><span class="text-nowrap text-nowrap-down"> Le plus bas <span class="mdi mdi-arrow-bottom-right icon-item"></span></span>
+  
+              </p>
+            </div>
+  
+          </div>
+  
+  
+          <h5 class="card-title text-uppercase text-muted mb-0" style="font-size: 16px; font-weight: 700; margin-left: 0px; text-align: center;">
+            Ce mois
+          </h5>
+         
+  
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <div class="card card-stats mb-4 mb-xl-0">
+        <div class="card-body">
+          <div class="col-sm-12 row" style="margin-right: 0px;  padding: 0; margin-left: 0px;     margin-bottom: 0px;">
+            <div class="col-sm-6" style="padding-left: 0px;">
+              <p class="mt-3 mb-0 text-muted text-sm text-card" data-toggle="tooltip" data-placement="top" [title]="'Date du valeur : ' + (maxValeurAchatAns.date | date: 'dd-MM-yyyy')">
+  
+                <span class="value-card price">
+                  <span class="long-value"> {{symbol}} </span>
+                   {{maxValeurAchatAns.valeur | number: '1.3'}} </span>
+              </p>
+                <p><span class="text-nowrap text-nowrap-up"> Le plus haut <span class="mdi mdi-arrow-top-right icon-item"></span></span>
+                </p>
+           
+            </div>
+            <div class="col-sm-6"   style="padding-right: 0px;">
+              <p class="mt-3 mb-0 text-muted text-sm text-card" data-toggle="tooltip" data-placement="top" [title]="'Date du valeur : ' + (minValeurAchatAns.date | date: 'dd-MM-yyyy')">
+  
+                <span class="value-card price"> 
+                  <span class="long-value"> {{symbol}} </span>
+                  {{minValeurAchatAns.valeur | number : '1.3'}} </span>
+              </p>
+                <p><span class="text-nowrap text-nowrap-down"> Le plus bas <span class="mdi mdi-arrow-bottom-right icon-item"></span></span>
+  
+              </p>
+            </div>
+  
+          </div>
+  
+  
+          <h5 class="card-title text-uppercase text-muted mb-0" style="font-size: 16px; font-weight: 700; margin-left: 0px; text-align: center;">
+            Cette année
+          </h5>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+  
+  
+  </div>
+  <br>
+  <br>
+  
+  <!-- ===== Table =====-->
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" 
+   class="mat-elevation-z8 table-dashboard m-2" >
+  
+    <!-- bank Column -->
+    <ng-container matColumnDef="nomBanque">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="pb-2"> Banque </th>
+      <td mat-cell *matCellDef="let element"> {{element.nomBanque}} </td>
+    </ng-container>
+  
+    <!-- AED Column -->
+  
+    <ng-container matColumnDef="AED">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">AED</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.deviseAED !== '0'; else emptyValue">{{ element.deviseAED | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+  
+    <ng-container matColumnDef="EUR">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">EUR</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.deviseEUR !== '0'; else emptyValue">{{element.deviseEUR | number:'1.3-3'}}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+  
+    <ng-container matColumnDef="LYD">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">LYD</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.deviseLYD !== '0'; else emptyValue">{{ element.deviseLYD | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="BHD">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">BHD</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseBHD !== '0'; else emptyValue">{{ element.deviseBHD | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="SAR">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">SAR</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseSAR !== '0'; else emptyValue">{{ element.deviseSAR | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+  
+    <ng-container matColumnDef="CAD">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">CAD</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseCAD !== '0'; else emptyValue">{{ element.deviseCAD | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+  
+    <ng-container matColumnDef="DKK">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">DKK</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseDKK !== '0'; else emptyValue">{{ element.deviseDKK | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="USD">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">USD</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseUSD !== '0'; else emptyValue">{{ element.deviseUSD | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="GBP">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">GBP</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseGBP !== '0'; else emptyValue">{{ element.deviseGBP | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    
+  
+    <ng-container matColumnDef="JPY">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">JPY</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseJPY !== '0'; else emptyValue">{{ element.deviseJPY | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="NOK">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">NOK</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseNOK !== '0'; else emptyValue">{{ element.deviseNOK | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="SEK">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">SEK</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseSEK !== '0'; else emptyValue">{{ element.deviseSEK | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="CHF">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">CHF</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseCHF !== '0'; else emptyValue">{{ element.deviseCHF | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="KWD">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">KWD</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseKWD !== '0'; else emptyValue">{{ element.deviseKWD | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="QAR">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">QAR</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseQAR !== '0'; else emptyValue">{{ element.deviseQAR | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="CNY">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="onHeaderClicked($event)" class="pb-2">
+        <span style="color: rgb(224, 159, 62);">CNY</span>
+      </th>
+      <td mat-cell class="align-self-center" *matCellDef="let element">
+        <ng-container *ngIf="element.deviseCNY !== '0'; else emptyValue">{{ element.deviseCNY | number:'1.3-3' }}</ng-container>
+        <ng-template #emptyValue> </ng-template>
+      </td>
+    </ng-container>
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="d-flex justify-content-end m-2">
+    <select class="form-select device-select  text-black justify-content-end" [(value)]="headerValue" (change)="onChange($event.target.value)" aria-label="Default select example">
+    <option selected>Choisir devise</option>
+    <option value="AED">AED</option>
+    <option value="EUR">EUR</option>
+    <option value="BHD">BHD</option>
+    <option value="SAR">SAR</option>
+    <option value="CAD">CAD</option>
+    <option value="DKK">DKK</option>
+    <option value="USD">USD</option>
+    <option value="GBP">GBP</option>
+    <option value="JPY">JPY</option>
+    <option value="NOK">NOK</option>
+    <option value="SEK">SEK</option>
+    <option value="KWD">KWD</option>
+    <option value="QAR">QAR</option>
+    <option value="CNY">CNY</option>
+  </select>
+  </div>
+  
+  
+  <div [chart]="stock" class="m-2"></div>
+  <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
+  
